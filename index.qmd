@@ -1,6 +1,6 @@
 ---
 title: "Missing Data and Imputation - Data Science Capstone"
-author: "Anna Dragotta"
+author: "Vyshnavi Nammi, Dheeraj Reddy Podduturi, Ruchith Chippari, Anna Dragotta"
 date: '`r Sys.Date()`'
 format:
   html:
