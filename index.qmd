@@ -21,25 +21,67 @@ editor:
 
 ### **What is “Missing Data and Data Imputation”?**
 
-Missing data refers to missing values for certain observations or variables in a dataset. When collecting or recording data, it is not uncommon to encounter situations where information is not available for every individual or specific variable. Missing data can occur for various reasons, such as non-response by participants, data entry errors, equipment malfunctions, or simply because certain information was not collected.
+Missing data refers to missing values for certain observations or
+variables in a dataset. When collecting or recording data, it is not
+uncommon to encounter situations where information is not available for
+every individual or specific variable. Missing data can occur for
+various reasons, such as non-response by participants, data entry
+errors, equipment malfunctions, or simply because certain information
+was not collected.
 
 There are three main types of missing data:
 
-1\. Missing Completely at Random (MCAR): Data missingness is unrelated to observed and unobserved variables. In other words, the probability of data being missing is the same for all observations.
+1\. Missing Completely at Random (MCAR): Data missingness is unrelated
+to observed and unobserved variables. In other words, the probability of
+data being missing is the same for all observations.
 
-2\. Missing at Random (MAR): The missingness is related to observed variables but not to the values of the missing data itself. In this case, the probability of data being missing can be predicted by other variables in the dataset.
+2\. Missing at Random (MAR): The missingness is related to observed
+variables but not to the values of the missing data itself. In this
+case, the probability of data being missing can be predicted by other
+variables in the dataset.
 
-3\. Missing Not at Random (MNAR): The missingness is related to the values of the missing data itself, even after considering observed variables. This type of missing data can introduce bias and is often more challenging to handle.
+3\. Missing Not at Random (MNAR): The missingness is related to the
+values of the missing data itself, even after considering observed
+variables. This type of missing data can introduce bias and is often
+more challenging to handle.
 
-Handling missing data is crucial in statistical analysis because it can lead to biased or inefficient results if not addressed properly. Researchers employ various techniques, such as imputation methods, to estimate or replace the missing values and ensure the validity and reliability of their analyses. Imputation involves filling in missing values with plausible estimates based on the observed data or using statistical models to predict missing values.
+Handling missing data is crucial in statistical analysis because it can
+lead to biased or inefficient results if not addressed properly.
+Researchers employ various techniques, such as imputation methods, to
+estimate or replace the missing values and ensure the validity and
+reliability of their analyses. Imputation involves filling in missing
+values with plausible estimates based on the observed data or using
+statistical models to predict missing values.
 
-Researchers need to be aware of the nature and mechanisms of missing data in their datasets, as the choice of imputation method depends on these factors. Ignoring missing data or handling it incorrectly can impact the accuracy and generalizability of study findings.
+Researchers need to be aware of the nature and mechanisms of missing
+data in their datasets, as the choice of imputation method depends on
+these factors. Ignoring missing data or handling it incorrectly can
+impact the accuracy and generalizability of study findings.
 
-Data imputation is a technique that aims to replace the missing data with a substitute value. This technique can be applied when removing data from the dataset is not feasible. Due to reasons such as a reduction in the size of the dataset by a large extent. Reduction in this way can also raise concerns for biases and incorrect analysis, reduction can lead to distortion in the data variables and impact of the final model with biases. The goal is to restore the complete dataset and not lose any more of the data.
+Data imputation is a technique that aims to replace the missing data
+with a substitute value. This technique can be applied when removing
+data from the dataset is not feasible. Due to reasons such as a
+reduction in the size of the dataset by a large extent. Reduction in
+this way can also raise concerns for biases and incorrect analysis,
+reduction can lead to distortion in the data variables and impact of the
+final model with biases. The goal is to restore the complete dataset and
+not lose any more of the data.
 
 ### Related work
 
-The EHR has increasingly become used for data mining and analysis for a variety of health conditions. However, due to irregular observation times and innate uncertainties in a medical setting, the EHR datasets are missing values. The EHR systems were not created in mind for research. Researchers who do use this data may categorize this missing data as missing completely at random, missing at random, or not missing at random. (Marino et al. 2021) Regarding missing completely at random (MCAR) data, all of the data points have the same odds to be missing. Missing at random is attributable to things like the patient’s condition, which means the missingness of the data is independent of the value of the data. Not missing random data completely depends on the value of the data. For each of these categories, the level of bias can be different. (Jazayeri et al. 2020)
+The EHR has increasingly become used for data mining and analysis for a
+variety of health conditions. However, due to irregular observation
+times and innate uncertainties in a medical setting, the EHR datasets
+are missing values. The EHR systems were not created in mind for
+research. Researchers who do use this data may categorize this missing
+data as missing completely at random, missing at random, or not missing
+at random. (Marino et al. 2021) Regarding missing completely at random
+(MCAR) data, all of the data points have the same odds to be missing.
+Missing at random is attributable to things like the patient’s
+condition, which means the missingness of the data is independent of the
+value of the data. Not missing random data completely depends on the
+value of the data. For each of these categories, the level of bias can
+be different. (Jazayeri et al. 2020)
 
 ### Methods
 
@@ -65,24 +107,94 @@ The EHR has increasingly become used for data mining and analysis for a variety 
 
 \-   Random forest
 
-Other imputation techniques consist of complete case analysis (CCA), arbitrary value imputation, and frequent category imputation. Complete case analysis involves directly removing the rows that have missing data. This is also known as a listwise deletion. The assumption is the data is missing at random (MAR). Arbitrary value imputation involves handling both numerical and categorical variables. This technique additionally includes grouping the missing values in a column and then a value far from the range of the column. The values could be 999999, -999999, missing or not defined. The assumption for this technique is the data is not missing at random. Furthermore, frequent category imputation is a technique that replaces the missing value with the variable that has the highest frequency, meaning one replaces the value with the mode of the column. This is also called mode imputation. The assumption regarding this technique is that the data is missing at random.
+Other imputation techniques consist of complete case analysis (CCA),
+arbitrary value imputation, and frequent category imputation. Complete
+case analysis involves directly removing the rows that have missing
+data. This is also known as a listwise deletion. The assumption is the
+data is missing at random (MAR). Arbitrary value imputation involves
+handling both numerical and categorical variables. This technique
+additionally includes grouping the missing values in a column and then a
+value far from the range of the column. The values could be 999999,
+-999999, missing or not defined. The assumption for this technique is
+the data is not missing at random. Furthermore, frequent category
+imputation is a technique that replaces the missing value with the
+variable that has the highest frequency, meaning one replaces the value
+with the mode of the column. This is also called mode imputation. The
+assumption regarding this technique is that the data is missing at
+random.
 
-Another technique is multiple imputation. This imputation method is an approach to missing data applied to common statistical packages. Multiple imputation is used to allow for the uncertainty of the missing data via creating many different plausible imputed datasets and appropriately mixing results produced from each of them. The first step is to create multiple copies of the dataset with the missing values substituted via the imputed values since we can never know the true values of the missing data, this imputation course of action should capture fully all uncertainty in foreseeing the missing values by inserting appropriate variability into the multiple imputed values. The second stage is to utilize a standard statistical method. This method should fit the model of interest for each of the datasets that experienced imputation. (Sterne et al. 2009)
+Another technique is multiple imputation. This imputation method is an
+approach to missing data applied to common statistical packages.
+Multiple imputation is used to allow for the uncertainty of the missing
+data via creating many different plausible imputed datasets and
+appropriately mixing results produced from each of them. The first step
+is to create multiple copies of the dataset with the missing values
+substituted via the imputed values since we can never know the true
+values of the missing data, this imputation course of action should
+capture fully all uncertainty in foreseeing the missing values by
+inserting appropriate variability into the multiple imputed values. The
+second stage is to utilize a standard statistical method. This method
+should fit the model of interest for each of the datasets that
+experienced imputation. (Sterne et al. 2009)
 
 ## Analysis and Results
 
-The Titanic dataset contains information about the passengers on board during the tragic event, categorizing them into three classes (1, 2, and 3). In total, there were 1309 people on board, with Class 1 having 200 people, Class 2 having 119 people, and Class 3 having 181 people. The dataset provides valuable insights into the demographics, relationships, and circumstances of the passengers aboard the Titanic during its ill-fated journey. The missing information in certain fields may require careful handling during analysis to ensure accurate and meaningful results. The Titanic Ship Sunk dataset reveals missing information across various fields. Specifically, records lack gender details for certain passengers, instances exist where fare payments are not recorded, cabin numbers are missing for some individuals, and information about the port of embarkation is absent for others. Lifeboat assignment details, identification numbers for recovered bodies, and home or destination information are not provided for specific cases. Addressing these gaps in data is imperative during analysis, and researchers are advised to employ suitable methods like imputation or exclusion based on research goals and the nature of the missing information. It is crucial to thoroughly assess the impact of missing data on results and draw conclusions accordingly for a comprehensive and accurate interpretation of the dataset.
+The Titanic dataset contains information about the passengers on board
+during the tragic event, categorizing them into three classes (1, 2, and
+3). In total, there were 1309 people on board, with Class 1 having 200
+people, Class 2 having 119 people, and Class 3 having 181 people. The
+dataset provides valuable insights into the demographics, relationships,
+and circumstances of the passengers aboard the Titanic during its
+ill-fated journey. The missing information in certain fields may require
+careful handling during analysis to ensure accurate and meaningful
+results. The Titanic Ship Sunk dataset reveals missing information
+across various fields. Specifically, records lack gender details for
+certain passengers, instances exist where fare payments are not
+recorded, cabin numbers are missing for some individuals, and
+information about the port of embarkation is absent for others. Lifeboat
+assignment details, identification numbers for recovered bodies, and
+home or destination information are not provided for specific cases.
+Addressing these gaps in data is imperative during analysis, and
+researchers are advised to employ suitable methods like imputation or
+exclusion based on research goals and the nature of the missing
+information. It is crucial to thoroughly assess the impact of missing
+data on results and draw conclusions accordingly for a comprehensive and
+accurate interpretation of the dataset.
 
 ```{r, warning=FALSE, echo=T, message=FALSE}
 
-
+# Install and load necessary packages
+#install.packages("tidyverse")
+#library(tidyverse)
+#install.packages("readxl")
+library(readxl)
 ```
 
 ```{r, warning=FALSE, echo=TRUE}
 
+your_data <- read_excel("Titanic_dataset.xlsx")
+#head(your_data)
 
+# Define the columns for which you want to perform imputation
+columns_to_impute <- c("pclass", "survived", "age", "sibsp", "parch", "fare")
 
-  
+missing_age <- sum(is.na(your_data$age))
+missing_cabin <- sum(is.na(your_data$cabin))
+missing_boat <- sum(is.na(your_data$boat))
+missing_body <- sum(is.na(your_data$body))
+missing_home_dest <- sum(is.na(your_data$home.dest))
+
+# Print the counts of missing values
+cat("Missing values in 'age':", missing_age, "\n")
+Missing values in 'age': 263 
+cat("Missing values in 'cabin':", missing_cabin, "\n")
+Missing values in 'cabin': 1014 
+cat("Missing values in 'boat':", missing_boat, "\n")
+Missing values in 'boat': 823 
+cat("Missing values in 'body':", missing_body, "\n")
+Missing values in 'body': 1188 
+cat("Missing values in 'home.dest':", missing_home_dest, "\n")
+Missing values in 'home.dest': 564   
 
 ```
 
@@ -96,22 +208,99 @@ The Titanic dataset contains information about the passengers on board during th
 
 ## References
 
-\[Jazayeri, A., Liang, O. S., & Yang, C. C. (2020, May 7). Imputation of Missing Data in Electronic Health Records Based on Patients’ Similarities. https://www.ncbi.nlm.nih.gov/pmc/articles/PMC8982680/ \](Jazayeri, A., Liang, O. S., & Yang, C. C. (2020, May 7). Imputation of Missing Data in Electronic Health Records Based on Patients’ Similarities. https://www.ncbi.nlm.nih.gov/pmc/articles/PMC8982680/
+Jazayeri, A., Liang, O. S., & Yang, C. C. (2020, May 7). Imputation of
+Missing Data in Electronic Health Records Based on Patients’
+Similarities. https://www.ncbi.nlm.nih.gov/pmc/articles/PMC8982680/ 
 
-Marino, M., Lucas, J., Latour, E., & Heintzman, J. D. (2021, April). Missing data in primary care research: importance, implications, and approaches. https://www.ncbi.nlm.nih.gov/pmc/articles/PMC8243609/ Mack, C. (2018). Types of missing data. Managing Missing Data in Patient Registries: Addendum to Registries for Evaluating Patient Outcomes: A User’s Guide, Third Edition \[Internet\]. https://www.ncbi.nlm.nih.gov/books/NBK493614/ Jakobsen, J. C., Gluud, C., Wetterslev,
+Marino, M., Lucas, J., Latour, E., & Heintzman, J. D. (2021, April).
+Missing data in primary care research: importance, implications, and
+approaches. https://www.ncbi.nlm.nih.gov/pmc/articles/PMC8243609/ 
 
-J., & Winkel, P. (2017, December 6). When and how should multiple imputations be used for handling missing data in randomized clinical trials – a practical guide with flowcharts - BMC Medical Research methodology. BioMed Central. https://bmcmedresmethodol.biomedcentral.com/articles/10.1186/s12874-017-0442-1 K
+Mack, C. (2018). Types of missing data. Managing Missing Data in Patient
+Registries: Addendum to Registries for Evaluating Patient Outcomes: A
+User’s Guide, Third Edition \[Internet\].
+https://www.ncbi.nlm.nih.gov/books/NBK493614/ 
 
-Ross, R., Breskin, A., & Westreich, D. (2020, June). When Is a Complete-Case Approach to Missing Data Valid? The Importance of Effect-Measure Modification. National Library of Medicine . https://www.ncbi.nlm.nih.gov/pmc/articles/PMC7705610/ Sterne, J. A. C., White, I. R., Carlin, J. B., Spratt, M., Royston, P., Kenward, M. G., Wood, A. M., & Carpenter,
+Jakobsen, J. C., Gluud, C., Wetterslev, J., & Winkel, P. (2017, December
+6). When and how should multiple imputations be used for handling
+missing data in randomized clinical trials – a practical guide with
+flowcharts - BMC Medical Research methodology. BioMed Central.
+https://bmcmedresmethodol.biomedcentral.com/articles/10.1186/s12874-017-0442-1 
 
-J. R. (2009, June 29). Multiple imputation for missing data in epidemiological and clinical research: Potential and pitfalls. The BMJ. https://www.bmj.com/content/338/bmj.b2393#:\~:text=When%20it%20is%20plausible%20that,to%20be%20included%20in%20analyses V. H. Umathe and G. Chaudhary, "Imputation methods for incomplete data," 2015 International Conference on Innovations in Information, Embedded and Communication Systems (ICIIECS), Coimbatore, India, 2015, pp. 1-4, doi: 10.1109/ICIIECS.2015.7193063.W. Kim, W. Cho, J. Choi, J. Kim, C. Park, and J.
+K Ross, R., Breskin, A., & Westreich, D. (2020, June). When Is a
+Complete-Case Approach to Missing Data Valid? The Importance of
+Effect-Measure Modification. National Library of Medicine .
+https://www.ncbi.nlm.nih.gov/pmc/articles/PMC7705610/ 
 
-Choo, "A Comparison of the Effects of Data Imputation Methods on Model Performance," 2019 21st International Conference on Advanced Communication Technology (ICACT), PyeongChang, Korea (South), 2019, pp. 592-599, doi: 10.23919/ICACT.2019.8702000.K. -
+Sterne, J. A. C., White, I. R., Carlin, J. B., Spratt, M., Royston, P.,
+Kenward, M. G., Wood, A. M., & Carpenter, J. R. (2009, June 29).
+Multiple imputation for missing data in epidemiological and clinical
+research: Potential and pitfalls. The BMJ.
+https://www.bmj.com/content/338/bmj.b2393#:\~:text=When%20it%20is%20plausible%20that,to%20be%20included%20in%20analyses 
 
-F. Jea, C. -W. Hsu and L. -Y. Tang, "A Missing Data Imputation Method With Distance Function," 2018 International Conference on Machine Learning and Cybernetics (ICMLC), Chengdu, China, 2018, pp. 450-455, doi: 10.1109/ICMLC.2018.8526985. Q. -T. Phan, Y. -
+V. H. Umathe and G. Chaudhary, "Imputation methods for incomplete data,"
+2015 International Conference on Innovations in Information, Embedded
+and Communication Systems (ICIIECS), Coimbatore, India, 2015, pp. 1-4,
+doi: 10.1109/ICIIECS.2015.7193063.
 
-K. Wu, Q. -D. Phan and H. -Y. Lo, "A Study on Missing Data Imputation Methods for Improving Hourly Solar Dataset," 2022 8th International Conference on Applied System Innovation (ICASI), Nantou, Taiwan, 2022, pp. 21-24, doi: 10.1109/ICASI55125.2022.9774453. K. Chungnoy and P. Songmuang, "Missing Values Imputation Framework for Mixed Datasets," 2023 IEEE International Conference on Cybernetics and Innovations (ICCI), phetchaburi, Thailand, 2023, pp. 1-5, doi: 10.1109/ICCI57424.2023.10111846. K. Tripathi, H. Saini and G. Rathee, "Missing Values Imputation in Food Consumption: An Analytical Study," 2021 6th International Conference on Signal Processing, Computing and Control (ISPCC), Solan, India, 2021, pp. 303-307, doi: 10.1109/ISPCC53510.2021.9609371. Nurzaman, T. Siswantining, S. M. Soemartojo and D. Sarwinda, "Application of Sequential Regression Multivariate Imputation Method on Multivariate Normal Missing Data," 2019 3rd International Conference on Informatics and Computational Sciences (ICICoS), Semarang, Indonesia, 2019, pp. 1-6, doi: 10.1109/ICICoS48119.2019.8982423. W. Yu, W. Zhu, G. Liu, B. Kan, T. Zhao and H. Liu, "Cluster-Based Best Match Scanning for Large-Scale Missing Data Imputation," 2017 3rd International Conference on Big Data Computing and Communications (BIGCOM), Chengdu, China, 2017, pp. 232-238, doi: 10.1109/BIGCOM.2017.48. C. Yan, J. Yuan, Z.
+W. Kim, W. Cho, J. Choi, J. Kim, C. Park, and J. Choo, "A Comparison of
+the Effects of Data Imputation Methods on Model Performance," 2019 21st
+International Conference on Advanced Communication Technology (ICACT),
+PyeongChang, Korea (South), 2019, pp. 592-599, doi:
+10.23919/ICACT.2019.8702000.\
+\
+K. -F. Jea, C. -W. Hsu and L. -Y. Tang, "A Missing Data Imputation
+Method With Distance Function," 2018 International Conference on Machine
+Learning and Cybernetics (ICMLC), Chengdu, China, 2018, pp. 450-455,
+doi: 10.1109/ICMLC.2018.8526985.
 
-Ye, and Z. Yang, "A Discrete Missing Data Imputation Method Based on Improved Multi-layer Perceptron," 2021 11th IEEE International Conference on Intelligent Data Acquisition and Advanced Computing Systems: Technology and Applications (IDAACS), Cracow, Poland, 2021, pp. 480-484, doi: 10.1109/IDAACS53288.2021.9661028. L. Ehrlinger, T.
+Q. -T. Phan, Y. -K. Wu, Q. -D. Phan and H. -Y. Lo, "A Study on Missing
+Data Imputation Methods for Improving Hourly Solar Dataset," 2022 8th
+International Conference on Applied System Innovation (ICASI), Nantou,
+Taiwan, 2022, pp. 21-24, doi: 10.1109/ICASI55125.2022.9774453.
 
-Grubinger, B. Varga, M. Pichler, T. Natschläger and J. Zeindl, "Treating Missing Data in Industrial Data Analytics," 2018 Thirteenth International Conference on Digital Information Management (ICDIM), Berlin, Germany, 2018, pp. 148-155, doi: 10.1109/ICDIM.2018.8846984. E. F. Akmam, T. Siswantining, S. M. Soemartojo, and D. Sarwinda, "Multiple Imputation with Predictive Mean Matching Method for Numerical Missing Data," 2019 3rd International Conference on Informatics and Computational Sciences (ICICoS), Semarang, Indonesia, 2019, pp. 1-6, doi: 10.1109/ICICoS48119.2019.8982510. C. F. Usanmaz, M. E. White, M. Valancius and M. D. Wang, "An Expansion for Automated Cardiac Anomaly Detection Frameworks with Multimodal Missing Data Imputation," 2021 IEEE EMBS International Conference on Biomedical and Health Informatics (BHI), Athens, Greece, 2021, pp. 1-5, doi: 10.1109/BHI50953.2021.9508517.)
+K. Chungnoy and P. Songmuang, "Missing Values Imputation Framework for
+Mixed Datasets," 2023 IEEE International Conference on Cybernetics and
+Innovations (ICCI), phetchaburi, Thailand, 2023, pp. 1-5, doi:
+10.1109/ICCI57424.2023.10111846.
+
+ K. Tripathi, H. Saini and G. Rathee, "Missing Values Imputation in Food
+Consumption: An Analytical Study," 2021 6th International Conference on
+Signal Processing, Computing and Control (ISPCC), Solan, India, 2021,
+pp. 303-307, doi: 10.1109/ISPCC53510.2021.9609371.
+
+Nurzaman, T. Siswantining, S. M. Soemartojo and D. Sarwinda,
+"Application of Sequential Regression Multivariate Imputation Method on
+Multivariate Normal Missing Data," 2019 3rd International Conference on
+Informatics and Computational Sciences (ICICoS), Semarang, Indonesia,
+2019, pp. 1-6, doi: 10.1109/ICICoS48119.2019.8982423.
+
+W. Yu, W. Zhu, G. Liu, B. Kan, T. Zhao and H. Liu, "Cluster-Based Best
+Match Scanning for Large-Scale Missing Data Imputation," 2017 3rd
+International Conference on Big Data Computing and Communications
+(BIGCOM), Chengdu, China, 2017, pp. 232-238, doi:
+10.1109/BIGCOM.2017.48.
+
+C. Yan, J. Yuan, Z. Ye, and Z. Yang, "A Discrete Missing Data Imputation
+Method Based on Improved Multi-layer Perceptron," 2021 11th IEEE
+International Conference on Intelligent Data Acquisition and Advanced
+Computing Systems: Technology and Applications (IDAACS), Cracow, Poland,
+2021, pp. 480-484, doi: 10.1109/IDAACS53288.2021.9661028.
+
+L. Ehrlinger, T. Grubinger, B. Varga, M. Pichler, T. Natschläger and J.
+Zeindl, "Treating Missing Data in Industrial Data Analytics," 2018
+Thirteenth International Conference on Digital Information Management
+(ICDIM), Berlin, Germany, 2018, pp. 148-155, doi:
+10.1109/ICDIM.2018.8846984.
+
+E. F. Akmam, T. Siswantining, S. M. Soemartojo, and D. Sarwinda,
+"Multiple Imputation with Predictive Mean Matching Method for Numerical
+Missing Data," 2019 3rd International Conference on Informatics and
+Computational Sciences (ICICoS), Semarang, Indonesia, 2019, pp. 1-6,
+doi: 10.1109/ICICoS48119.2019.8982510.
+
+C. F. Usanmaz, M. E. White, M. Valancius and M. D. Wang, "An Expansion
+for Automated Cardiac Anomaly Detection Frameworks with Multimodal
+Missing Data Imputation," 2021 IEEE EMBS International Conference on
+Biomedical and Health Informatics (BHI), Athens, Greece, 2021, pp. 1-5,
+doi: 10.1109/BHI50953.2021.9508517.
