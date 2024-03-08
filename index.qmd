@@ -208,99 +208,101 @@ Missing values in 'home.dest': 564
 
 ## References
 
-Jazayeri, A., Liang, O. S., & Yang, C. C. (2020, May 7). Imputation of
-Missing Data in Electronic Health Records Based on Patients’
-Similarities. https://www.ncbi.nlm.nih.gov/pmc/articles/PMC8982680/ 
+1\) Jazayeri, A., Liang, O. S., & Yang, C. C. (2020, May 7). Imputation
+of Missing Data in Electronic Health Records Based on Patients’
+Similarities. https://www.ncbi.nlm.nih.gov/pmc/articles/PMC8982680/\
+ 
 
-Marino, M., Lucas, J., Latour, E., & Heintzman, J. D. (2021, April).
+2\) Marino, M., Lucas, J., Latour, E., & Heintzman, J. D. (2021, April).
 Missing data in primary care research: importance, implications, and
 approaches. https://www.ncbi.nlm.nih.gov/pmc/articles/PMC8243609/ 
 
-Mack, C. (2018). Types of missing data. Managing Missing Data in Patient
-Registries: Addendum to Registries for Evaluating Patient Outcomes: A
-User’s Guide, Third Edition \[Internet\].
+3\) Mack, C. (2018). Types of missing data. Managing Missing Data in
+Patient Registries: Addendum to Registries for Evaluating Patient
+Outcomes: A User’s Guide, Third Edition \[Internet\].
 https://www.ncbi.nlm.nih.gov/books/NBK493614/ 
 
-Jakobsen, J. C., Gluud, C., Wetterslev, J., & Winkel, P. (2017, December
-6). When and how should multiple imputations be used for handling
-missing data in randomized clinical trials – a practical guide with
-flowcharts - BMC Medical Research methodology. BioMed Central.
+4\) Jakobsen, J. C., Gluud, C., Wetterslev, J., & Winkel, P. (2017,
+December 6). When and how should multiple imputations be used for
+handling missing data in randomized clinical trials – a practical guide
+with flowcharts - BMC Medical Research methodology. BioMed Central.
 https://bmcmedresmethodol.biomedcentral.com/articles/10.1186/s12874-017-0442-1 
 
-K Ross, R., Breskin, A., & Westreich, D. (2020, June). When Is a
+5\) K Ross, R., Breskin, A., & Westreich, D. (2020, June). When Is a
 Complete-Case Approach to Missing Data Valid? The Importance of
 Effect-Measure Modification. National Library of Medicine .
 https://www.ncbi.nlm.nih.gov/pmc/articles/PMC7705610/ 
 
-Sterne, J. A. C., White, I. R., Carlin, J. B., Spratt, M., Royston, P.,
-Kenward, M. G., Wood, A. M., & Carpenter, J. R. (2009, June 29).
+6\) Sterne, J. A. C., White, I. R., Carlin, J. B., Spratt, M., Royston,
+P., Kenward, M. G., Wood, A. M., & Carpenter, J. R. (2009, June 29).
 Multiple imputation for missing data in epidemiological and clinical
 research: Potential and pitfalls. The BMJ.
 https://www.bmj.com/content/338/bmj.b2393#:\~:text=When%20it%20is%20plausible%20that,to%20be%20included%20in%20analyses 
 
-V. H. Umathe and G. Chaudhary, "Imputation methods for incomplete data,"
-2015 International Conference on Innovations in Information, Embedded
-and Communication Systems (ICIIECS), Coimbatore, India, 2015, pp. 1-4,
-doi: 10.1109/ICIIECS.2015.7193063.
+7\) V. H. Umathe and G. Chaudhary, "Imputation methods for incomplete
+data," 2015 International Conference on Innovations in Information,
+Embedded and Communication Systems (ICIIECS), Coimbatore, India, 2015,
+pp. 1-4, doi: 10.1109/ICIIECS.2015.7193063.
 
-W. Kim, W. Cho, J. Choi, J. Kim, C. Park, and J. Choo, "A Comparison of
-the Effects of Data Imputation Methods on Model Performance," 2019 21st
-International Conference on Advanced Communication Technology (ICACT),
-PyeongChang, Korea (South), 2019, pp. 592-599, doi:
+8\) W. Kim, W. Cho, J. Choi, J. Kim, C. Park, and J. Choo, "A Comparison
+of the Effects of Data Imputation Methods on Model Performance," 2019
+21st International Conference on Advanced Communication Technology
+(ICACT), PyeongChang, Korea (South), 2019, pp. 592-599, doi:
 10.23919/ICACT.2019.8702000.\
 \
-K. -F. Jea, C. -W. Hsu and L. -Y. Tang, "A Missing Data Imputation
+9) K. -F. Jea, C. -W. Hsu and L. -Y. Tang, "A Missing Data Imputation
 Method With Distance Function," 2018 International Conference on Machine
 Learning and Cybernetics (ICMLC), Chengdu, China, 2018, pp. 450-455,
 doi: 10.1109/ICMLC.2018.8526985.
 
-Q. -T. Phan, Y. -K. Wu, Q. -D. Phan and H. -Y. Lo, "A Study on Missing
-Data Imputation Methods for Improving Hourly Solar Dataset," 2022 8th
-International Conference on Applied System Innovation (ICASI), Nantou,
-Taiwan, 2022, pp. 21-24, doi: 10.1109/ICASI55125.2022.9774453.
+10\) Q. -T. Phan, Y. -K. Wu, Q. -D. Phan and H. -Y. Lo, "A Study on
+Missing Data Imputation Methods for Improving Hourly Solar Dataset,"
+2022 8th International Conference on Applied System Innovation (ICASI),
+Nantou, Taiwan, 2022, pp. 21-24, doi: 10.1109/ICASI55125.2022.9774453.
 
-K. Chungnoy and P. Songmuang, "Missing Values Imputation Framework for
-Mixed Datasets," 2023 IEEE International Conference on Cybernetics and
-Innovations (ICCI), phetchaburi, Thailand, 2023, pp. 1-5, doi:
+11\) K. Chungnoy and P. Songmuang, "Missing Values Imputation Framework
+for Mixed Datasets," 2023 IEEE International Conference on Cybernetics
+and Innovations (ICCI), phetchaburi, Thailand, 2023, pp. 1-5, doi:
 10.1109/ICCI57424.2023.10111846.
 
- K. Tripathi, H. Saini and G. Rathee, "Missing Values Imputation in Food
-Consumption: An Analytical Study," 2021 6th International Conference on
-Signal Processing, Computing and Control (ISPCC), Solan, India, 2021,
-pp. 303-307, doi: 10.1109/ISPCC53510.2021.9609371.
+12\) K. Tripathi, H. Saini and G. Rathee, "Missing Values Imputation in
+Food Consumption: An Analytical Study," 2021 6th International
+Conference on Signal Processing, Computing and Control (ISPCC), Solan,
+India, 2021, pp. 303-307, doi: 10.1109/ISPCC53510.2021.9609371.
 
-Nurzaman, T. Siswantining, S. M. Soemartojo and D. Sarwinda,
+13\) Nurzaman, T. Siswantining, S. M. Soemartojo and D. Sarwinda,
 "Application of Sequential Regression Multivariate Imputation Method on
 Multivariate Normal Missing Data," 2019 3rd International Conference on
 Informatics and Computational Sciences (ICICoS), Semarang, Indonesia,
 2019, pp. 1-6, doi: 10.1109/ICICoS48119.2019.8982423.
 
-W. Yu, W. Zhu, G. Liu, B. Kan, T. Zhao and H. Liu, "Cluster-Based Best
-Match Scanning for Large-Scale Missing Data Imputation," 2017 3rd
+14\) W. Yu, W. Zhu, G. Liu, B. Kan, T. Zhao and H. Liu, "Cluster-Based
+Best Match Scanning for Large-Scale Missing Data Imputation," 2017 3rd
 International Conference on Big Data Computing and Communications
 (BIGCOM), Chengdu, China, 2017, pp. 232-238, doi:
 10.1109/BIGCOM.2017.48.
 
-C. Yan, J. Yuan, Z. Ye, and Z. Yang, "A Discrete Missing Data Imputation
-Method Based on Improved Multi-layer Perceptron," 2021 11th IEEE
-International Conference on Intelligent Data Acquisition and Advanced
-Computing Systems: Technology and Applications (IDAACS), Cracow, Poland,
-2021, pp. 480-484, doi: 10.1109/IDAACS53288.2021.9661028.
+15\) C. Yan, J. Yuan, Z. Ye, and Z. Yang, "A Discrete Missing Data
+Imputation Method Based on Improved Multi-layer Perceptron," 2021 11th
+IEEE International Conference on Intelligent Data Acquisition and
+Advanced Computing Systems: Technology and Applications (IDAACS),
+Cracow, Poland, 2021, pp. 480-484, doi:
+10.1109/IDAACS53288.2021.9661028.
 
-L. Ehrlinger, T. Grubinger, B. Varga, M. Pichler, T. Natschläger and J.
-Zeindl, "Treating Missing Data in Industrial Data Analytics," 2018
-Thirteenth International Conference on Digital Information Management
-(ICDIM), Berlin, Germany, 2018, pp. 148-155, doi:
+16\) L. Ehrlinger, T. Grubinger, B. Varga, M. Pichler, T. Natschläger
+and J. Zeindl, "Treating Missing Data in Industrial Data Analytics,"
+2018 Thirteenth International Conference on Digital Information
+Management (ICDIM), Berlin, Germany, 2018, pp. 148-155, doi:
 10.1109/ICDIM.2018.8846984.
 
-E. F. Akmam, T. Siswantining, S. M. Soemartojo, and D. Sarwinda,
+17\) E. F. Akmam, T. Siswantining, S. M. Soemartojo, and D. Sarwinda,
 "Multiple Imputation with Predictive Mean Matching Method for Numerical
 Missing Data," 2019 3rd International Conference on Informatics and
 Computational Sciences (ICICoS), Semarang, Indonesia, 2019, pp. 1-6,
 doi: 10.1109/ICICoS48119.2019.8982510.
 
-C. F. Usanmaz, M. E. White, M. Valancius and M. D. Wang, "An Expansion
-for Automated Cardiac Anomaly Detection Frameworks with Multimodal
-Missing Data Imputation," 2021 IEEE EMBS International Conference on
-Biomedical and Health Informatics (BHI), Athens, Greece, 2021, pp. 1-5,
-doi: 10.1109/BHI50953.2021.9508517.
+18\) C. F. Usanmaz, M. E. White, M. Valancius and M. D. Wang, "An
+Expansion for Automated Cardiac Anomaly Detection Frameworks with
+Multimodal Missing Data Imputation," 2021 IEEE EMBS International
+Conference on Biomedical and Health Informatics (BHI), Athens, Greece,
+2021, pp. 1-5, doi: 10.1109/BHI50953.2021.9508517.
