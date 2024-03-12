@@ -31,16 +31,16 @@ was not collected.
 
 There are three main types of missing data:
 
-1\. Missing Completely at Random (MCAR): Data missingness is unrelated
-to observed and unobserved variables. In other words, the probability of
-data being missing is the same for all observations.
+1\. **Missing Completely at Random (MCAR)**: Data missingness is
+unrelated to observed and unobserved variables. In other words, the
+probability of data being missing is the same for all observations.
 
-2\. Missing at Random (MAR): The missingness is related to observed
+2\. **Missing at Random (MAR)**: The missingness is related to observed
 variables but not to the values of the missing data itself. In this
 case, the probability of data being missing can be predicted by other
 variables in the dataset.
 
-3\. Missing Not at Random (MNAR): The missingness is related to the
+3\. **Missing Not at Random (MNAR)**: The missingness is related to the
 values of the missing data itself, even after considering observed
 variables. This type of missing data can introduce bias and is often
 more challenging to handle.
@@ -161,6 +161,8 @@ information. It is crucial to thoroughly assess the impact of missing
 data on results and draw conclusions accordingly for a comprehensive and
 accurate interpretation of the dataset.
 
+**1. Mean/Median Imputation Method**
+
 ```{r, warning=FALSE, echo=T, message=FALSE}
 
 # Install and load necessary packages
@@ -185,17 +187,88 @@ missing_body <- sum(is.na(your_data$body))
 missing_home_dest <- sum(is.na(your_data$home.dest))
 
 # Print the counts of missing values
-cat("Missing values in 'age':", missing_age, "\n")
-Missing values in 'age': 263 
-cat("Missing values in 'cabin':", missing_cabin, "\n")
-Missing values in 'cabin': 1014 
-cat("Missing values in 'boat':", missing_boat, "\n")
-Missing values in 'boat': 823 
-cat("Missing values in 'body':", missing_body, "\n")
-Missing values in 'body': 1188 
-cat("Missing values in 'home.dest':", missing_home_dest, "\n")
-Missing values in 'home.dest': 564   
 
+cat("Missing values in 'age':", missing_age, "\n")
+#Missing values in 'age': 263
+
+cat("Missing values in 'cabin':", missing_cabin, "\n")
+#Missing values in 'cabin': 1014 
+
+cat("Missing values in 'boat':", missing_boat, "\n")
+#Missing values in 'boat': 823 
+
+cat("Missing values in 'body':", missing_body, "\n")
+#Missing values in 'body': 1188 
+
+cat("Missing values in 'home.dest':", missing_home_dest, "\n")
+#Missing values in 'home.dest': 564   
+
+```
+
+2.  **Multiple Imputation**
+
+```{r, warning=FALSE, echo=TRUE}
+# Install and load necessary packages
+# install.packages("mice")
+# install.packages("openxlsx")
+library(mice)
+library(openxlsx)
+
+# Load the Titanic dataset
+your_data <- read_excel("Titanic_dataset.xlsx")
+
+# Define the columns for which you want to perform imputation
+columns_to_impute <- c("pclass", "survived", "age", "sibsp", "parch", "fare")
+
+# Create a copy of the original data to preserve the original dataset
+imputation_data <- your_data
+
+# Set the seed for reproducibility
+set.seed(123)
+
+# Perform multiple imputation
+imputed_data <- mice(imputation_data[, columns_to_impute], m = 5, method = 'pmm')
+
+# Other imputation methods: 'logreg' for logistic regression, 'rf' for random forest
+
+# Complete the imputation process
+completed_data <- complete(imputed_data)
+
+# Save the imputed dataset using openxlsx
+write.xlsx(completed_data, "Imputed_Titanic_dataset_MultipleImputation.xlsx")
+
+# Display summary statistics of the imputed dataset
+summary(completed_data)
+
+```
+
+3.  **K-Nearest Neighbors (KNN) Imputation**
+
+```{r}
+ # Install and load necessary packages
+# install.packages("readxl")
+#install.packages("VIM")
+library(readxl)
+library(VIM)
+
+# Load the Titanic dataset
+your_data <- read_excel("Titanic_dataset.xlsx")
+
+# Display missing data pattern
+aggr(your_data, col = c("blue", "white"), numbers = TRUE, sortVars = TRUE, labels = names(your_data), cex.axis = 0.5, gap = 3, ylab = c("Histogram of missing data", "Pattern"))
+
+#Perform KNN imputation
+your_data_imputed <- kNN(your_data, variable = "age", k = 5)  # Replace "age" with the column you want to impute
+# Repeat the above line for each column you want to impute
+
+# Display missing data pattern after imputation
+aggr(your_data_imputed, col = c("blue", "white"), numbers = TRUE, sortVars = TRUE, labels = names(your_data_imputed), cex.axis = 0.5, gap = 3, ylab = c("Histogram of missing data", "Pattern"))
+
+# Save the imputed dataset if needed
+write.xlsx(your_data_imputed, "Imputed_Titanic_dataset_KNN.xlsx")
+
+# Display summary statistics of the imputed dataset
+summary(your_data_imputed)
 ```
 
 ### Statistical Modeling
