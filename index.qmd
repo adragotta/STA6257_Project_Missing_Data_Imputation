@@ -47,7 +47,7 @@ values of the missing data itself, even after considering observed
 variables. This type of missing data can introduce bias and is often
 more challenging to handle.
 
-![](screenshot 3.png){width="617"}
+![](screenshot 3.png){width="627"}
 
 Handling missing data is crucial in statistical analysis because it can
 lead to biased or inefficient results if not addressed properly.
