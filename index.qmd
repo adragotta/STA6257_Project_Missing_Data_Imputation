@@ -45,7 +45,7 @@ variables in the dataset.
 3\. **Missing Not at Random (MNAR)**: The missingness is related to the
 values of the missing data itself, even after considering observed
 variables. This type of missing data can introduce bias and is often
-more challenging to handle.![](Screenshot 2.png)
+more challenging to handle. ![](Screenshot 2.png)
 
 Handling missing data is crucial in statistical analysis because it can
 lead to biased or inefficient results if not addressed properly.
