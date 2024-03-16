@@ -27,23 +27,26 @@ uncommon to encounter situations where information is not available for
 every individual or specific variable. Missing data can occur for
 various reasons, such as non-response by participants, data entry
 errors, equipment malfunctions, or simply because certain information
-was not collected.
-
-There are three main types of missing data:
+was not collected. There are three main types of missing data.
 
 1\. **Missing Completely at Random (MCAR)**: Data missingness is
 unrelated to observed and unobserved variables. In other words, the
-probability of data being missing is the same for all observations.
+probability of data being missing is the same for all observations.\
+![](images/clipboard-1787501804.png){width="610"}
 
 2\. **Missing at Random (MAR)**: The missingness is related to observed
 variables but not to the values of the missing data itself. In this
 case, the probability of data being missing can be predicted by other
 variables in the dataset.
 
+![](images/clipboard-3718230433.png){width="617"}
+
 3\. **Missing Not at Random (MNAR)**: The missingness is related to the
 values of the missing data itself, even after considering observed
 variables. This type of missing data can introduce bias and is often
 more challenging to handle.
+
+![](images/clipboard-2822021530.png){width="609"}
 
 Handling missing data is crucial in statistical analysis because it can
 lead to biased or inefficient results if not addressed properly.
@@ -114,14 +117,14 @@ data. This is also known as a listwise deletion. The assumption is the
 data is missing at random (MAR). Arbitrary value imputation involves
 handling both numerical and categorical variables. This technique
 additionally includes grouping the missing values in a column and then a
-value far from the range of the column. The values could be 999999,
--999999, missing or not defined. The assumption for this technique is
-the data is not missing at random. Furthermore, frequent category
-imputation is a technique that replaces the missing value with the
-variable that has the highest frequency, meaning one replaces the value
-with the mode of the column. This is also called mode imputation. The
-assumption regarding this technique is that the data is missing at
-random.
+value far from the range of the column. The values could be 999999, -
+999999, missing or not defined. The assumption for this technique is the
+data is not missing at random. Furthermore, frequent category imputation
+is a technique that replaces the missing value with the variable that
+has the highest frequency, meaning one replaces the value with the mode
+of the column. This is also called mode imputation. The assumption
+regarding this technique is that the data is missing at random. (Ross et
+al. 2020).
 
 Another technique is multiple imputation. This imputation method is an
 approach to missing data applied to common statistical packages.
@@ -161,7 +164,18 @@ information. It is crucial to thoroughly assess the impact of missing
 data on results and draw conclusions accordingly for a comprehensive and
 accurate interpretation of the dataset.
 
-**1. Mean/Median Imputation Method**
+**1. Mean/Median Imputation Method\
+**This is simple single imputation method, one will take the average or
+common value and fill in for those missing values. Has the assumption
+data is missing completely at random (MCAR).\
+\
+Mean imputation could be used when distribution is normal and median
+imputation if distribution of data is skewed.
+
+This method can also artificially reduce variability of data. When one
+has a of missing data to fill in and you fill in with the exact same
+value. Variance and standard deviation decreases which is not
+necessarily desirable. (Zhang 2016)
 
 ```{r, warning=FALSE, echo=T, message=FALSE}
 
@@ -207,6 +221,11 @@ cat("Missing values in 'home.dest':", missing_home_dest, "\n")
 
 2.  **Multiple Imputation**
 
+Instead of inputting a single value for the missing value. Multiple
+imputations attempts to input multiple values into the missing value and
+run analysis with completed data sets in all those cases, then average
+the results to get an unbiased estimate. (Li et at 2016)
+
 ```{r, warning=FALSE, echo=TRUE}
 # Install and load necessary packages
 # install.packages("mice")
@@ -243,6 +262,9 @@ summary(completed_data)
 ```
 
 3.  **K-Nearest Neighbors (KNN) Imputation**
+
+Advanced technique that fills missing values via estimating them by the
+characteristics of similar neighboring data points. (Zhang 2016)
 
 ```{r}
  # Install and load necessary packages
@@ -283,8 +305,7 @@ summary(your_data_imputed)
 
 1\) Jazayeri, A., Liang, O. S., & Yang, C. C. (2020, May 7). Imputation
 of Missing Data in Electronic Health Records Based on Patients’
-Similarities. https://www.ncbi.nlm.nih.gov/pmc/articles/PMC8982680/\
- 
+Similarities. https://www.ncbi.nlm.nih.gov/pmc/articles/PMC8982680/
 
 2\) Marino, M., Lucas, J., Latour, E., & Heintzman, J. D. (2021, April).
 Missing data in primary care research: importance, implications, and
@@ -379,3 +400,27 @@ Expansion for Automated Cardiac Anomaly Detection Frameworks with
 Multimodal Missing Data Imputation," 2021 IEEE EMBS International
 Conference on Biomedical and Health Informatics (BHI), Athens, Greece,
 2021, pp. 1-5, doi: 10.1109/BHI50953.2021.9508517.
+
+19) Getzen E;Ungar L;Mowery D;Jiang X;Long Q;, E. G., Ungar, L., Mowery
+, D., & Jiang, X. (n.d.). *Mining for Equitable Health: Assessing the
+impact of missing data in Electronic Health Records*. Journal of
+biomedical informatics. https://pubmed.ncbi.nlm.nih.gov/36621750/
+
+20\) Strickland L 2006. School Kids Clipart.
+<https://www.mycutegraphics.com/>
+
+21\) Robins, James M., and Richard D. Gill (1997) “Non-response models
+for the analysis of non-monotone ignorable missing data.” Statistics in
+Medicine 16: 39-56.
+
+22\) Zhang, Z. (2016, January). *Missing data imputation: focusing on
+single imputation*. PubMed Central.
+https://www.ncbi.nlm.nih.gov/pmc/articles/PMC4716933/
+
+23\) Li, P., A. Stuart, E., & B. Allison, D. (2016, May). *Multiple
+Imputation: A Flexible Tool for Handling Missing Data*. PubMed Central.
+https://www.ncbi.nlm.nih.gov/pmc/articles/PMC4638176/
+
+24\) Zhang, Z. (2016b, June). *Introduction to machine learning:
+k-nearest neighbors*. National Library of Medicine .
+https://www.ncbi.nlm.nih.gov/pmc/articles/PMC4916348/
