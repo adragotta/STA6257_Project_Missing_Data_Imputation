@@ -47,29 +47,7 @@ values of the missing data itself, even after considering observed
 variables. This type of missing data can introduce bias and is often
 more challenging to handle.
 
-Ex. You ask the student’s name and how many books they have overdue.
-
-Students with 0 overdue books: 90% respond
-
-Students with 2 overdue books: 80% respond
-
-If a student truly has more overdue books they are less likely to
-respond
-
--   More overdue books, the less likely a student responds, higher rate
-    of missing value
-
-```{=html}
-<!-- -->
-```
--   Missing of the certain value depends on the TRUE value itself
-
-```{=html}
-<!-- -->
-```
--   Are the missing values based on the actual value of the value
-
-![](Screenshot 2.png){width="566"}
+![](Screenshot 2.png){width="613"}
 
 Handling missing data is crucial in statistical analysis because it can
 lead to biased or inefficient results if not addressed properly.
