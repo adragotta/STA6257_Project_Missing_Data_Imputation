@@ -7,7 +7,7 @@
 <meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=yes">
 
 <meta name="author" content="Vyshnavi Nammi, Dheeraj Reddy Podduturi, Ruchith Chippari, Anna Dragotta">
-<meta name="dcterms.date" content="2024-03-16">
+<meta name="dcterms.date" content="2024-03-18">
 
 <title>Advanced Techniques for Missing Data Handling</title>
 <style>
@@ -3094,7 +3094,7 @@ vertical-align: -.125em;
     <div>
     <div class="quarto-title-meta-heading">Published</div>
     <div class="quarto-title-meta-contents">
-      <p class="date">March 16, 2024</p>
+      <p class="date">March 18, 2024</p>
     </div>
   </div>
   
@@ -3433,6 +3433,65 @@ Mean imputation could be used when distribution is normal and median imputation 
  3rd Qu.:256.0                                     
  Max.   :328.0                                     
  NA&#39;s   :1188                                      </code></pre>
+</div>
+</div>
+<ol start="4" type="1">
+<li><strong>Most Frequent Value Imputation<br>
+</strong>Also known as mode imputation, this is when the most frequent value replaces the missing values.This can be the most frequent value or most frequent category. This also may enable over-representation of the frequent variable.</li>
+</ol>
+<div class="cell">
+<details class="code-fold">
+<summary>Code</summary>
+<div class="sourceCode cell-code" id="cb23"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb23-1"><a href="#cb23-1" aria-hidden="true" tabindex="-1"></a><span class="co"># Load necessary packages</span></span>
+<span id="cb23-2"><a href="#cb23-2" aria-hidden="true" tabindex="-1"></a><span class="co"># install.packages(&quot;readxl&quot;)</span></span>
+<span id="cb23-3"><a href="#cb23-3" aria-hidden="true" tabindex="-1"></a><span class="co"># install.packages(&quot;Hmisc&quot;)</span></span>
+<span id="cb23-4"><a href="#cb23-4" aria-hidden="true" tabindex="-1"></a><span class="fu">library</span>(readxl)</span>
+<span id="cb23-5"><a href="#cb23-5" aria-hidden="true" tabindex="-1"></a><span class="fu">library</span>(Hmisc)</span>
+<span id="cb23-6"><a href="#cb23-6" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb23-7"><a href="#cb23-7" aria-hidden="true" tabindex="-1"></a><span class="co"># Load the Titanic dataset</span></span>
+<span id="cb23-8"><a href="#cb23-8" aria-hidden="true" tabindex="-1"></a>your_data <span class="ot">&lt;-</span> <span class="fu">read_excel</span>(<span class="st">&quot;Titanic_dataset.xlsx&quot;</span>)</span>
+<span id="cb23-9"><a href="#cb23-9" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb23-10"><a href="#cb23-10" aria-hidden="true" tabindex="-1"></a><span class="co"># Define the columns with missing data</span></span>
+<span id="cb23-11"><a href="#cb23-11" aria-hidden="true" tabindex="-1"></a>columns_with_missing <span class="ot">&lt;-</span> <span class="fu">c</span>(<span class="st">&quot;Sex&quot;</span>, <span class="st">&quot;Fare&quot;</span>, <span class="st">&quot;Cabin&quot;</span>, <span class="st">&quot;Embarked&quot;</span>, <span class="st">&quot;Boat&quot;</span>, <span class="st">&quot;Body&quot;</span>, <span class="st">&quot;Home.Dest&quot;</span>)</span>
+<span id="cb23-12"><a href="#cb23-12" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb23-13"><a href="#cb23-13" aria-hidden="true" tabindex="-1"></a><span class="co"># Perform imputation with the most frequent value for each column</span></span>
+<span id="cb23-14"><a href="#cb23-14" aria-hidden="true" tabindex="-1"></a>imputed_data <span class="ot">&lt;-</span> your_data</span>
+<span id="cb23-15"><a href="#cb23-15" aria-hidden="true" tabindex="-1"></a><span class="cf">for</span> (col <span class="cf">in</span> columns_with_missing) {</span>
+<span id="cb23-16"><a href="#cb23-16" aria-hidden="true" tabindex="-1"></a>  <span class="co"># Check if the column has missing values</span></span>
+<span id="cb23-17"><a href="#cb23-17" aria-hidden="true" tabindex="-1"></a>  <span class="cf">if</span> (<span class="fu">anyNA</span>(imputed_data[[col]])) {</span>
+<span id="cb23-18"><a href="#cb23-18" aria-hidden="true" tabindex="-1"></a>    <span class="co"># Impute missing values with the most frequent value</span></span>
+<span id="cb23-19"><a href="#cb23-19" aria-hidden="true" tabindex="-1"></a>    imputed_data[[col]] <span class="ot">&lt;-</span> <span class="fu">impute</span>(imputed_data[[col]], <span class="at">fun=</span><span class="cf">function</span>(x) { </span>
+<span id="cb23-20"><a href="#cb23-20" aria-hidden="true" tabindex="-1"></a>      tab <span class="ot">&lt;-</span> <span class="fu">table</span>(x)</span>
+<span id="cb23-21"><a href="#cb23-21" aria-hidden="true" tabindex="-1"></a>      levels <span class="ot">&lt;-</span> <span class="fu">names</span>(tab)[tab <span class="sc">==</span> <span class="fu">max</span>(tab)]</span>
+<span id="cb23-22"><a href="#cb23-22" aria-hidden="true" tabindex="-1"></a>      x[<span class="fu">is.na</span>(x)] <span class="ot">&lt;-</span> levels[<span class="dv">1</span>]</span>
+<span id="cb23-23"><a href="#cb23-23" aria-hidden="true" tabindex="-1"></a>      x</span>
+<span id="cb23-24"><a href="#cb23-24" aria-hidden="true" tabindex="-1"></a>    })</span>
+<span id="cb23-25"><a href="#cb23-25" aria-hidden="true" tabindex="-1"></a>  }</span>
+<span id="cb23-26"><a href="#cb23-26" aria-hidden="true" tabindex="-1"></a>}</span>
+<span id="cb23-27"><a href="#cb23-27" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb23-28"><a href="#cb23-28" aria-hidden="true" tabindex="-1"></a><span class="co"># Display the count of missing values for each column after imputation</span></span>
+<span id="cb23-29"><a href="#cb23-29" aria-hidden="true" tabindex="-1"></a>missing_counts <span class="ot">&lt;-</span> <span class="fu">colSums</span>(<span class="fu">is.na</span>(imputed_data))</span>
+<span id="cb23-30"><a href="#cb23-30" aria-hidden="true" tabindex="-1"></a><span class="fu">print</span>(<span class="st">&quot;Missing values for each column after imputation:&quot;</span>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+</details>
+<div class="cell-output cell-output-stdout">
+<pre><code>[1] &quot;Missing values for each column after imputation:&quot;</code></pre>
+</div>
+<details class="code-fold">
+<summary>Code</summary>
+<div class="sourceCode cell-code" id="cb25"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb25-1"><a href="#cb25-1" aria-hidden="true" tabindex="-1"></a><span class="st">&quot;Missing values for each column after imputation:&quot;</span></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+</details>
+<div class="cell-output cell-output-stdout">
+<pre><code>[1] &quot;Missing values for each column after imputation:&quot;</code></pre>
+</div>
+<details class="code-fold">
+<summary>Code</summary>
+<div class="sourceCode cell-code" id="cb27"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb27-1"><a href="#cb27-1" aria-hidden="true" tabindex="-1"></a><span class="fu">print</span>(missing_counts)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+</details>
+<div class="cell-output cell-output-stdout">
+<pre><code>   pclass  survived      name       sex       age     sibsp     parch    ticket 
+        0         0         0         0       263         0         0         0 
+     fare     cabin  embarked      boat      body home.dest 
+        1      1014         2       823      1188       564 </code></pre>
 </div>
 </div>
 <section id="statistical-modeling" class="level3">

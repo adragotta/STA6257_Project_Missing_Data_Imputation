@@ -40,14 +40,14 @@ variables but not to the values of the missing data itself. In this
 case, the probability of data being missing can be predicted by other
 variables in the dataset.
 
-![](Screenshot 1.png){width="623"}
+![](Screenshot%201.png){width="623"}
 
 3\. **Missing Not at Random (MNAR)**: The missingness is related to the
 values of the missing data itself, even after considering observed
 variables. This type of missing data can introduce bias and is often
 more challenging to handle.
 
-![](screenshot 3.png){width="627"}
+![](screenshot%203.png){width="627"}
 
 Handling missing data is crucial in statistical analysis because it can
 lead to biased or inefficient results if not addressed properly.
@@ -292,6 +292,47 @@ write.xlsx(your_data_imputed, "Imputed_Titanic_dataset_KNN.xlsx")
 
 # Display summary statistics of the imputed dataset
 summary(your_data_imputed)
+```
+
+4.  **Most Frequent Value Imputation \
+    **Also known as mode imputation, this is when the most frequent
+    value replaces the missing values.This can be the most frequent
+    value or most frequent category. This also may enable
+    over-representation of the frequent variable.
+
+```{r}
+# Load necessary packages
+# install.packages("readxl")
+# install.packages("Hmisc")
+library(readxl)
+library(Hmisc)
+
+# Load the Titanic dataset
+your_data <- read_excel("Titanic_dataset.xlsx")
+
+# Define the columns with missing data
+columns_with_missing <- c("Sex", "Fare", "Cabin", "Embarked", "Boat", "Body", "Home.Dest")
+
+# Perform imputation with the most frequent value for each column
+imputed_data <- your_data
+for (col in columns_with_missing) {
+  # Check if the column has missing values
+  if (anyNA(imputed_data[[col]])) {
+    # Impute missing values with the most frequent value
+    imputed_data[[col]] <- impute(imputed_data[[col]], fun=function(x) { 
+      tab <- table(x)
+      levels <- names(tab)[tab == max(tab)]
+      x[is.na(x)] <- levels[1]
+      x
+    })
+  }
+}
+
+# Display the count of missing values for each column after imputation
+missing_counts <- colSums(is.na(imputed_data))
+print("Missing values for each column after imputation:")
+"Missing values for each column after imputation:"
+print(missing_counts)
 ```
 
 ### Statistical Modeling
