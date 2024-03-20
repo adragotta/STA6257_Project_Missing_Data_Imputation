@@ -322,8 +322,10 @@ Total: 1309 people 
 Out of which the number of people that have not survived is 809 people
 and the number of people survived is 465 people.
 
+**Fields in the Dataset:** 
+
 |                                                                                      |
-|:----------------------------------------------------------------------:|
+|:--------------------------------------:|
 |                           Name: The name of the passenger.                           |
 |                            Sex: Gender of the passenger.                             |
 |                              Age: Age of the passenger.                              |
