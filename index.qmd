@@ -33,21 +33,67 @@ was not collected. There are three main types of missing data.
 unrelated to observed and unobserved variables. In other words, the
 probability of data being missing is the same for all observations.
 
-![](Screenshot%202024-03-16%20165449.png){width="627"}
+Example: You look at how many overdue library books each student has at
+a school.
+
+Student A - 0 overdue books
+
+Student B - 7 overdue books
+
+Student C - 3 overdue books
+
+Student D - ? (missing data)
+
+Librarians based on human error forget to input a value 3% of the time.
+You ask if this is based on the student or book but the librarians say
+this is completely random.
+
+-   Data goes missing at a completely consistent rate no matter what.
+-   Not dependent on anything at all, each value has consistent chance
+    of being missing
 
 2\. **Missing at Random (MAR)**: The missingness is related to observed
 variables but not to the values of the missing data itself. In this
 case, the probability of data being missing can be predicted by other
 variables in the dataset.
 
-![](Screenshot%201.png){width="623"}
+Example: You take a poll regarding the overdue books that compares
+freshman vs senior students.
+
+90% of freshman students respond
+
+70% of senior students respond
+
+So there’s a higher missing data rate among senior students
+
+-   Data is missing at a certain rate but that rate depends on another
+    variable in the data
+
+-   The rate of this missing data can be explained by another factor
+    (grade of the student)
 
 3\. **Missing Not at Random (MNAR)**: The missingness is related to the
 values of the missing data itself, even after considering observed
 variables. This type of missing data can introduce bias and is often
 more challenging to handle.
 
-![](screenshot%203.png){width="627"}
+Example:
+
+Students with 0 overdue books: 90% respond
+
+Students with 2 overdue books: 80% respond
+
+If a student truly has more overdue books they are less likely to
+respond
+
+-   More overdue books, the less likely a student responds, higher rate
+    of missing value
+
+-   Missing of the certain value depends on the TRUE value itself
+
+-   Are the missing values based on the actual value of the value\
+
+#### Literature Review
 
 Handling missing data is crucial in statistical analysis because it can
 lead to biased or inefficient results if not addressed properly.
@@ -62,6 +108,14 @@ data in their datasets, as the choice of imputation method depends on
 these factors. Ignoring missing data or handling it incorrectly can
 impact the accuracy and generalizability of study findings.
 
+A dataset in which some of the data is missing and disrupts the
+completeness of the data is known as missing data. The missing data in a
+dataset leads to incorrect computations, and incorrect output for the
+created pipelines leading to inaccurate predictions which could
+ultimately lead to the downfall of the business. Filling those missing
+data with substituted values is called data imputation. It is very
+important to handle missing values effectively during the process.
+
 Data imputation is a technique that aims to replace the missing data
 with a substitute value. This technique can be applied when removing
 data from the dataset is not feasible. Due to reasons such as a
@@ -70,46 +124,6 @@ this way can also raise concerns for biases and incorrect analysis,
 reduction can lead to distortion in the data variables and impact of the
 final model with biases. The goal is to restore the complete dataset and
 not lose any more of the data.
-
-### Related work
-
-The EHR has increasingly become used for data mining and analysis for a
-variety of health conditions. However, due to irregular observation
-times and innate uncertainties in a medical setting, the EHR datasets
-are missing values. The EHR systems were not created in mind for
-research. Researchers who do use this data may categorize this missing
-data as missing completely at random, missing at random, or not missing
-at random. (Marino et al. 2021) Regarding missing completely at random
-(MCAR) data, all of the data points have the same odds to be missing.
-Missing at random is attributable to things like the patient’s
-condition, which means the missingness of the data is independent of the
-value of the data. Not missing random data completely depends on the
-value of the data. For each of these categories, the level of bias can
-be different. (Jazayeri et al. 2020)
-
-### Methods
-
- Some of the data imputation techniques are mentioned below.\
-\
--   Next or Previous Value 
-
-\-   K Nearest Neighbors
-
-\-   Maximum or Minimum Value
-
-\-   Missing Value Prediction
-
-\-   Most Frequent Value
-
-\-   Average or Linear Interpolation
-
-\-   (Rounded) Mean or Moving Average or Median Value
-
-\-   Fixed Value
-
-\-   Rule-based imputation technique
-
-\-   Random forest
 
 Other imputation techniques consist of complete case analysis (CCA),
 arbitrary value imputation, and frequent category imputation. Complete
@@ -124,8 +138,8 @@ data is not missing at random. Furthermore, frequent category imputation
 is a technique that replaces the missing value with the variable that
 has the highest frequency, meaning one replaces the value with the mode
 of the column. This is also called mode imputation. The assumption
-regarding this technique is that the data is missing at random. (Ross et
-al. 2020).
+regarding this technique is that the data is missing at random. Ross et
+al. 2020)
 
 Another technique is multiple imputation. This imputation method is an
 approach to missing data applied to common statistical packages.
@@ -141,42 +155,197 @@ second stage is to utilize a standard statistical method. This method
 should fit the model of interest for each of the datasets that
 experienced imputation. (Sterne et al. 2009)
 
-## Analysis and Results
+### Related work
 
-The Titanic dataset contains information about the passengers on board
-during the tragic event, categorizing them into three classes (1, 2, and
-3). In total, there were 1309 people on board, with Class 1 having 200
-people, Class 2 having 119 people, and Class 3 having 181 people. The
-dataset provides valuable insights into the demographics, relationships,
-and circumstances of the passengers aboard the Titanic during its
-ill-fated journey. The missing information in certain fields may require
-careful handling during analysis to ensure accurate and meaningful
-results. The Titanic Ship Sunk dataset reveals missing information
-across various fields. Specifically, records lack gender details for
-certain passengers, instances exist where fare payments are not
-recorded, cabin numbers are missing for some individuals, and
-information about the port of embarkation is absent for others. Lifeboat
-assignment details, identification numbers for recovered bodies, and
-home or destination information are not provided for specific cases.
-Addressing these gaps in data is imperative during analysis, and
-researchers are advised to employ suitable methods like imputation or
-exclusion based on research goals and the nature of the missing
-information. It is crucial to thoroughly assess the impact of missing
-data on results and draw conclusions accordingly for a comprehensive and
-accurate interpretation of the dataset.
+The electronic health record has increasingly become used for data
+mining and analysis for a variety of health conditions. However, due to
+irregular observation times and innate uncertainties in a medical
+setting, the EHR datasets are missing values. The EHR systems were not
+created in mind for research. Researchers who do use this data may
+categorize this missing data as missing completely at random, missing at
+random, or not missing at random. (Marino et al. 2021) Regarding missing
+completely at random (MCAR) data, all of the data points have the same
+odds to be missing. Missing at random is attributable to things like the
+patient’s condition, which means the missingness of the data is
+independent of the value of the data. Not missing random data completely
+depends on the value of the data. For each of these categories, the
+level of bias can be different. (Jazayeri et al. 2020)
 
-**1. Mean/Median Imputation Method\
+It looks at research in a variety of fields, including the social
+sciences, economics, and healthcare, that investigate the prevalence and
+impact of missing data. This section evaluates the efficacy and
+suitability of several imputation techniques put forth in the literature
+for handling missing data. To show the benefits and drawbacks of various
+imputation methods, comparative assessments are carried out. In
+addition, multiple imputation techniques put out in the literature are
+thoroughly reviewed in this section. These techniques span a wide
+variety of expertise levels, from mean imputation to multiple imputation
+and machine learning-based imputation. Every approach is assessed
+according to how well it manages missing data, the fundamental
+presumptions it relies on, and how well it fits various dataset types
+and research problems.
+
+Similarly, comparative evaluations are carried out to illustrate the
+relative advantages and disadvantages of different imputation methods.
+These comparisons help researchers understand the trade-offs while
+choosing the best imputation strategy for their particular situation. To
+shed light on how missing data research is developing, recent
+developments and new directions in the field such as the application of
+deep learning algorithms for imputation tasks are also covered. This
+work provides a strong basis for the creation and assessment of
+imputation strategies later in the project by summarizing and analyzing
+earlier research. It emphasizes how important it is to deal with missing
+data and helps make well-informed decisions about which imputation
+techniques are best suited to the goals and limitations of the project.
+
+### Methods
+
+**Mean/Median Imputation\
 **This is simple single imputation method, one will take the average or
 common value and fill in for those missing values. Has the assumption
-data is missing completely at random (MCAR).\
-\
-Mean imputation could be used when distribution is normal and median
-imputation if distribution of data is skewed.
-
+data is missing completely at random (MCAR). Mean imputation could be
+used when distribution is normal and median imputation if distribution
+of data is skewed.\
 This method can also artificially reduce variability of data. When one
 has a of missing data to fill in and you fill in with the exact same
 value. Variance and standard deviation decreases which is not
 necessarily desirable. (Zhang 2016)
+
+Replace missing values with the mean or median of the observed values in
+the variable
+
+The mean() and median() functions in R can be used for this method.
+
+Mean Imputation: (\bar{X} = \frac{\sum_{i=1}^{n} X_i}{n})
+
+Median Imputation: (M = \text{median}(X_1, X_2, ..., X_n)) In both
+cases, missing values are replaced with the mean or median of the
+observed values in the variable (X)
+
+**Multiple Imputation**
+
+Instead of inputting a single value for the missing value. Multiple
+imputations attempts to input multiple values into the missing value and
+run analysis with completed data sets in all those cases, then average
+the results to get an unbiased estimate. (Li et at 2016)
+
+-   Generate multiple sets of plausible values for each missing data
+    point, considering the uncertainty associated with imputation.
+    -   The `mice` (Multivariate Imputation by Chained Equations)
+        package in R is commonly used for multiple imputation.
+
+The multiple imputation process involves three steps:
+
+a\) Imputation (m times): Generate (m) imputed datasets, where missing
+values are filled using a specified imputation method.
+
+b\) Analysis (m times): Analyze each imputed dataset separately using
+the desired statistical analysis.
+
+c\) Pooling: Combine the results from the (m) analyses to obtain final
+estimates and standard errors.
+
+The imputation step often involves drawing imputed values from a
+predictive distribution based on observed data.
+
+**K-Nearest Neighbors (KNN) Imputation**
+
+Advanced technique that fills missing values via estimating them by the
+characteristics of similar neighboring data points. (Zhang 2016)
+
+Impute missing values based on the values of their nearest neighbors in
+the dataset.
+
+The `impute.knn()` function in the `impute` package is a popular choice
+for KNN imputation.
+
+Method: Impute missing values by averaging or using the majority vote of
+the (k) nearest neighbors in the feature space. - Application: Effective
+for imputing values based on similarities in multivariate space.\
+- For each missing value (X\_{\text{miss}}) in a variable (X):
+\[X\_{\text{miss}} = \frac{1}{k} \sum\_{i=1}\^{k} X_i\] - Where (X_i)
+represents the observed values of the (k) nearest neighbors to the
+missing value.
+
+**Most Frequent Value Imputation**
+
+Also known as mode imputation, this is when the most frequent value
+replaces the missing values.This can be the most frequent value or most
+frequent category. This also may enable over-representation of the
+frequent variable.
+
+Method: Replace missing values with the most frequently occurring value
+in the variable. - Application: Appropriate for categorical variables or
+when missing values are likely to be the mode.
+
+## Analysis and Results
+
+**Overview:** The Titanic dataset contains information about the
+passengers on board during the tragic event, categorizing them into
+three classes (1, 2, and 3). In total, there were 1309 people on board,
+with Class 1 having 200 people, Class 2 having 119 people, and Class 3
+having 181 people. The dataset provides valuable insights into the
+demographics, relationships, and circumstances of the passengers aboard
+the Titanic during its ill-fated journey. The missing information in
+certain fields may require careful handling during analysis to ensure
+accurate and meaningful results. The Titanic Ship Sunk dataset reveals
+missing information across various fields. Specifically, records lack
+gender details for certain passengers, instances exist where fare
+payments are not recorded, cabin numbers are missing for some
+individuals, and information about the port of embarkation is absent for
+others. Lifeboat assignment details, identification numbers for
+recovered bodies, and home or destination information are not provided
+for specific cases. Addressing these gaps in data is imperative during
+analysis, and researchers are advised to employ suitable methods like
+imputation or exclusion based on research goals and the nature of the
+missing information. It is crucial to thoroughly assess the impact of
+missing data on results and draw conclusions accordingly for a
+comprehensive and accurate interpretation of the dataset.
+
+**Survival Statistics:** 
+
+As per the information provided in the dataset, Out of the total
+passengers, 809 did not survive, while 465 individuals survived
+
+**Data Distribution:** The data has been distributed as per the class,
+below is the information on how the data has been distributed between
+the people. 
+
+Class 1: 200 people 
+
+Class 2: 119 people 
+
+Class 3: 181 people 
+
+Total: 1309 people 
+
+Out of which the number of people that have not survived is 809 people
+and the number of people survived is 465 people.
+
+|                                                                                      |
+|:----------------------------------------------------------------------:|
+|                           Name: The name of the passenger.                           |
+|                            Sex: Gender of the passenger.                             |
+|                              Age: Age of the passenger.                              |
+|                     Sibsp: Number of siblings or spouses aboard.                     |
+|                     Parch: Number of parents or children aboard.                     |
+|                                Ticket: Ticket number.                                |
+|                           Fare: Fare paid for the ticket.                            |
+|                                 Cabin: Cabin number.                                 |
+|                            Embarked: Port of embarkation.                            |
+|                              Boat: Lifeboat assignment.                              |
+|                  Body: Identification number of the recovered body.                  |
+|                   Home.Dest: Home or destination of the passenger.                   |
+|   Missing Information: Certain fields in the dataset contain missing information:    |
+|            Sex: Missing information about the gender of some passengers.             |
+|          Fare: Missing information about the fare paid by some passengers.           |
+|                  Cabin: Missing cabin numbers for some passengers.                   |
+|  Embarked: Missing information about the port of embarkation for some passengers.    |
+|        Boat: Lifeboat assignment information is missing for some passengers.         |
+|  Body: Identification numbers of recovered bodies are missing for some passengers.   |
+| Home.Dest: Information about the home or destination is missing for some passengers. |
+
+**1. Mean/Median Imputation**
 
 ```{r, warning=FALSE, echo=T, message=FALSE}
 
@@ -221,11 +390,6 @@ cat("Missing values in 'home.dest':", missing_home_dest, "\n")
 ```
 
 2.  **Multiple Imputation**
-
-Instead of inputting a single value for the missing value. Multiple
-imputations attempts to input multiple values into the missing value and
-run analysis with completed data sets in all those cases, then average
-the results to get an unbiased estimate. (Li et at 2016)
 
 ```{r, warning=FALSE, echo=TRUE}
 # Install and load necessary packages
@@ -294,11 +458,7 @@ write.xlsx(your_data_imputed, "Imputed_Titanic_dataset_KNN.xlsx")
 summary(your_data_imputed)
 ```
 
-4.  **Most Frequent Value Imputation \
-    **Also known as mode imputation, this is when the most frequent
-    value replaces the missing values.This can be the most frequent
-    value or most frequent category. This also may enable
-    over-representation of the frequent variable.
+4.  **Most Frequent Value Imputation**
 
 ```{r}
 # Load necessary packages
@@ -342,6 +502,22 @@ print(missing_counts)
 ```
 
 ### Conclusion
+
+In conclusion, the project on missing data and imputation using
+R-Language has provided a thorough exploration of diverse techniques for
+handling missing values. By delving into methods such as mean/median
+imputation, multiple imputation, k-nearest neighbors, and random forest,
+we have gained a nuanced understanding of their applications and
+limitations. The practical implementation in R demonstrated the
+accessibility of these methods, showcasing the importance of selecting
+an approach aligned with data characteristics. Emphasizing best
+practices, such as sensitivity analysis and validation, ensures the
+reliability of imputation results. This project not only equips
+researchers with practical skills for addressing missing data but also
+highlights the dynamic landscape of emerging trends, positioning them at
+the forefront of advancements in the field. Overall, the use of
+R-Language for missing data imputation underscores its effectiveness and
+user-friendly nature in facilitating robust statistical analyses.
 
 ## References
 
@@ -448,21 +624,18 @@ Conference on Biomedical and Health Informatics (BHI), Athens, Greece,
 impact of missing data in Electronic Health Records*. Journal of
 biomedical informatics. https://pubmed.ncbi.nlm.nih.gov/36621750/
 
-20\) Strickland L 2006. School Kids Clipart.
-<https://www.mycutegraphics.com/>
-
-21\) Robins, James M., and Richard D. Gill (1997) “Non-response models
+20\) Robins, James M., and Richard D. Gill (1997) “Non-response models
 for the analysis of non-monotone ignorable missing data.” Statistics in
 Medicine 16: 39-56.
 
-22\) Zhang, Z. (2016, January). *Missing data imputation: focusing on
+21\) Zhang, Z. (2016, January). *Missing data imputation: focusing on
 single imputation*. PubMed Central.
 https://www.ncbi.nlm.nih.gov/pmc/articles/PMC4716933/
 
-23\) Li, P., A. Stuart, E., & B. Allison, D. (2016, May). *Multiple
+22\) Li, P., A. Stuart, E., & B. Allison, D. (2016, May). *Multiple
 Imputation: A Flexible Tool for Handling Missing Data*. PubMed Central.
 https://www.ncbi.nlm.nih.gov/pmc/articles/PMC4638176/
 
-24\) Zhang, Z. (2016b, June). *Introduction to machine learning:
+23\) Zhang, Z. (2016b, June). *Introduction to machine learning:
 k-nearest neighbors*. National Library of Medicine .
 https://www.ncbi.nlm.nih.gov/pmc/articles/PMC4916348/
