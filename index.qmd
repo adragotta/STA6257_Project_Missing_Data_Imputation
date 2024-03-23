@@ -33,67 +33,23 @@ was not collected. There are three main types of missing data.
 unrelated to observed and unobserved variables. In other words, the
 probability of data being missing is the same for all observations.
 
-Example: You look at how many overdue library books each student has at
-a school.
-
-Student A - 0 overdue books
-
-Student B - 7 overdue books
-
-Student C - 3 overdue books
-
-Student D - ? (missing data)
-
-Librarians based on human error forget to input a value 3% of the time.
-You ask if this is based on the student or book but the librarians say
-this is completely random.
-
--   Data goes missing at a completely consistent rate no matter what.
--   Not dependent on anything at all, each value has consistent chance
-    of being missing
+![](Example 1.png){width="698"}
 
 2\. **Missing at Random (MAR)**: The missingness is related to observed
 variables but not to the values of the missing data itself. In this
 case, the probability of data being missing can be predicted by other
 variables in the dataset.
 
-Example: You take a poll regarding the overdue books that compares
-freshman vs senior students.
-
-90% of freshman students respond
-
-70% of senior students respond
-
-So there’s a higher missing data rate among senior students
-
--   Data is missing at a certain rate but that rate depends on another
-    variable in the data
-
--   The rate of this missing data can be explained by another factor
-    (grade of the student)
+![](Example 2.png){width="699"}
 
 3\. **Missing Not at Random (MNAR)**: The missingness is related to the
 values of the missing data itself, even after considering observed
 variables. This type of missing data can introduce bias and is often
 more challenging to handle.
 
-Example:
+![](Example 3.png)
 
-Students with 0 overdue books: 90% respond
-
-Students with 2 overdue books: 80% respond
-
-If a student truly has more overdue books they are less likely to
-respond
-
--   More overdue books, the less likely a student responds, higher rate
-    of missing value
-
--   Missing of the certain value depends on the TRUE value itself
-
--   Are the missing values based on the actual value of the value\
-
-#### Literature Review
+## Literature Review
 
 Handling missing data is crucial in statistical analysis because it can
 lead to biased or inefficient results if not addressed properly.
@@ -101,8 +57,7 @@ Researchers employ various techniques, such as imputation methods, to
 estimate or replace the missing values and ensure the validity and
 reliability of their analyses. Imputation involves filling in missing
 values with plausible estimates based on the observed data or using
-statistical models to predict missing values.
-
+statistical models to predict missing values.\
 Researchers need to be aware of the nature and mechanisms of missing
 data in their datasets, as the choice of imputation method depends on
 these factors. Ignoring missing data or handling it incorrectly can
@@ -114,8 +69,8 @@ dataset leads to incorrect computations, and incorrect output for the
 created pipelines leading to inaccurate predictions which could
 ultimately lead to the downfall of the business. Filling those missing
 data with substituted values is called data imputation. It is very
-important to handle missing values effectively during the process.
-
+important to handle missing values effectively during the process. \
+\
 Data imputation is a technique that aims to replace the missing data
 with a substitute value. This technique can be applied when removing
 data from the dataset is not feasible. Due to reasons such as a
@@ -124,6 +79,34 @@ this way can also raise concerns for biases and incorrect analysis,
 reduction can lead to distortion in the data variables and impact of the
 final model with biases. The goal is to restore the complete dataset and
 not lose any more of the data.
+
+An example of a single imputation method would be mean and median
+imputation. This method acts to replace the missing data with
+statistical approximations of the missing data. The main object of this
+being to create a complete dataset. In the method one will see these
+missing values replaced by the mean or median, depending on if the
+distribution is normal or skewed. If normal one could use mean
+imputation and if skewed one could utilize median imputation.
+Assumptions regarding this method would be that the data is missing
+completely at random (MCAR). Advantages of the mean/median method are
+also it's simple and quick regarding obtaining the complete dataset.
+Disadvantages of the mean/median method are that it distorts the
+original variance as well as the covariance regarding variables
+left-over in the dataset. [@zhang2016missing]
+
+Another technique is multiple imputation. This imputation method is an
+approach to missing data applied to common statistical packages.
+Multiple imputation is used to allow for the uncertainty of the missing
+data via creating many different plausible imputed datasets and
+appropriately mixing results produced from each of them. The first step
+is to create multiple copies of the dataset with the missing values
+substituted via the imputed values since we can never know the true
+values of the missing data, this imputation course of action should
+capture fully all uncertainty in foreseeing the missing values by
+inserting appropriate variability into the multiple imputed values. The
+second stage is to utilize a standard statistical method. This method
+should fit the model of interest for each of the datasets that
+experienced imputation. [@sterne2009multiple]
 
 Other imputation techniques consist of complete case analysis (CCA),
 arbitrary value imputation, and frequent category imputation. Complete
@@ -138,78 +121,44 @@ data is not missing at random. Furthermore, frequent category imputation
 is a technique that replaces the missing value with the variable that
 has the highest frequency, meaning one replaces the value with the mode
 of the column. This is also called mode imputation. The assumption
-regarding this technique is that the data is missing at random. Ross et
-al. 2020)
+regarding this technique is that the data is missing at random.
+[@ross2020complete]
 
-Another technique is multiple imputation. This imputation method is an
-approach to missing data applied to common statistical packages.
-Multiple imputation is used to allow for the uncertainty of the missing
-data via creating many different plausible imputed datasets and
-appropriately mixing results produced from each of them. The first step
-is to create multiple copies of the dataset with the missing values
-substituted via the imputed values since we can never know the true
-values of the missing data, this imputation course of action should
-capture fully all uncertainty in foreseeing the missing values by
-inserting appropriate variability into the multiple imputed values. The
-second stage is to utilize a standard statistical method. This method
-should fit the model of interest for each of the datasets that
-experienced imputation. (Sterne et al. 2009)
+## Related work  
 
-### Related work
+#### Electronic Health Record (EHR)
 
-The electronic health record has increasingly become used for data
-mining and analysis for a variety of health conditions. However, due to
-irregular observation times and innate uncertainties in a medical
-setting, the EHR datasets are missing values. The EHR systems were not
-created in mind for research. Researchers who do use this data may
-categorize this missing data as missing completely at random, missing at
-random, or not missing at random. (Marino et al. 2021) Regarding missing
-completely at random (MCAR) data, all of the data points have the same
-odds to be missing. Missing at random is attributable to things like the
-patient’s condition, which means the missingness of the data is
-independent of the value of the data. Not missing random data completely
-depends on the value of the data. For each of these categories, the
-level of bias can be different. (Jazayeri et al. 2020)
+The EHR has increasingly become used for data mining and analysis for a
+variety of health conditions. However, due to irregular observation
+times and innate uncertainties in a medical setting, the EHR datasets
+are missing values. The EHR systems were not created in mind for
+research. Researchers who do use this data may categorize this missing
+data as missing completely at random, missing at random, or not missing
+at random. (Marino et al. 2021) Regarding missing completely at random
+(MCAR) data, all of the data points have the same odds to be missing.
+Missing at random is attributable to things like the patient’s
+condition, which means the missingness of the data is independent of the
+value of the data. Not missing random data completely depends on the
+value of the data. For each of these categories, the level of bias can
+be different. [@jazayeri2020imputation]
 
-It looks at research in a variety of fields, including the social
-sciences, economics, and healthcare, that investigate the prevalence and
-impact of missing data. This section evaluates the efficacy and
-suitability of several imputation techniques put forth in the literature
-for handling missing data. To show the benefits and drawbacks of various
-imputation methods, comparative assessments are carried out. In
-addition, multiple imputation techniques put out in the literature are
-thoroughly reviewed in this section. These techniques span a wide
-variety of expertise levels, from mean imputation to multiple imputation
-and machine learning-based imputation. Every approach is assessed
-according to how well it manages missing data, the fundamental
-presumptions it relies on, and how well it fits various dataset types
-and research problems.
-
-Similarly, comparative evaluations are carried out to illustrate the
-relative advantages and disadvantages of different imputation methods.
-These comparisons help researchers understand the trade-offs while
-choosing the best imputation strategy for their particular situation. To
-shed light on how missing data research is developing, recent
-developments and new directions in the field such as the application of
-deep learning algorithms for imputation tasks are also covered. This
-work provides a strong basis for the creation and assessment of
-imputation strategies later in the project by summarizing and analyzing
-earlier research. It emphasizes how important it is to deal with missing
-data and helps make well-informed decisions about which imputation
-techniques are best suited to the goals and limitations of the project.
-
-### Methods
+Additionally it is something to consider that the EHR can reflect health
+inequity. Patients who belong to different groups may have different
+amounts of data in their health record. This can also result in biases
+in the data collection process. Missing data can also be caused by
+fragmented care in certain under-served groups. This results in the data
+being collected to be less informative. [@rozier2022electronic]
 
 **Mean/Median Imputation\
 **This is simple single imputation method, one will take the average or
-common value and fill in for those missing values. Has the assumption
-data is missing completely at random (MCAR). Mean imputation could be
-used when distribution is normal and median imputation if distribution
-of data is skewed.\
-This method can also artificially reduce variability of data. When one
-has a of missing data to fill in and you fill in with the exact same
-value. Variance and standard deviation decreases which is not
-necessarily desirable. (Zhang 2016)
+common value and fill in for those missing values. This method has the
+assumption data is missing completely at random (MCAR) so one could
+apply this method to MCAR data. Mean imputation should be utlizied when
+distribution is normal and median imputation if distribution of data is
+skewed. This method can also artificially reduce variability of data.
+When one has a of missing data to fill in and you fill in with the exact
+same value. Variance and standard deviation decreases which is not
+necessarily desirable. [@jadhav2019comparison]
 
 Replace missing values with the mean or median of the observed values in
 the variable
@@ -218,16 +167,21 @@ The mean() and median() functions in R can be used for this method.
 
 Mean Imputation: (\bar{X} = \frac{\sum_{i=1}^{n} X_i}{n})
 
-Median Imputation: (M = \text{median}(X_1, X_2, ..., X_n)) In both
-cases, missing values are replaced with the mean or median of the
-observed values in the variable (X)
+Median Imputation: (M = \text{median}(X_1, X_2, ..., X_n))
+
+In both cases, missing values are replaced with the mean or median of
+the observed values in the variable (X)
+
+![](images/clipboard-3744689167.png){width="493"}
+
+Figure 1: Mean/Median Imputation Normal Distribution
 
 **Multiple Imputation**
 
 Instead of inputting a single value for the missing value. Multiple
 imputations attempts to input multiple values into the missing value and
 run analysis with completed data sets in all those cases, then average
-the results to get an unbiased estimate. (Li et at 2016)
+the results to get an unbiased estimate. [@wayman2003multiple]
 
 -   Generate multiple sets of plausible values for each missing data
     point, considering the uncertainty associated with imputation.
@@ -248,10 +202,14 @@ estimates and standard errors.
 The imputation step often involves drawing imputed values from a
 predictive distribution based on observed data.
 
+![](images/clipboard-2077492971.png)
+
+Figure 2: Missing data value replaced by several different values
+
 **K-Nearest Neighbors (KNN) Imputation**
 
 Advanced technique that fills missing values via estimating them by the
-characteristics of similar neighboring data points. (Zhang 2016)
+characteristics of similar neighboring data points. [@kramer2013k]
 
 Impute missing values based on the values of their nearest neighbors in
 the dataset.
@@ -267,6 +225,10 @@ for imputing values based on similarities in multivariate space.\
 represents the observed values of the (k) nearest neighbors to the
 missing value.
 
+![](images/clipboard-2035736844.png){width="474"}
+
+Figure 3:
+
 **Most Frequent Value Imputation**
 
 Also known as mode imputation, this is when the most frequent value
@@ -276,7 +238,7 @@ frequent variable.
 
 Method: Replace missing values with the most frequently occurring value
 in the variable. - Application: Appropriate for categorical variables or
-when missing values are likely to be the mode.
+when missing values are likely to be the mode. [@sessa2016techniques]
 
 ## Analysis and Results
 
@@ -302,30 +264,30 @@ missing information. It is crucial to thoroughly assess the impact of
 missing data on results and draw conclusions accordingly for a
 comprehensive and accurate interpretation of the dataset.
 
-**Survival Statistics:** 
+**Survival Statistics:**
 
 As per the information provided in the dataset, Out of the total
 passengers, 809 did not survive, while 465 individuals survived
 
 **Data Distribution:** The data has been distributed as per the class,
 below is the information on how the data has been distributed between
-the people. 
+the people.
 
-Class 1: 200 people 
+Class 1: 200 people
 
-Class 2: 119 people 
+Class 2: 119 people
 
-Class 3: 181 people 
+Class 3: 181 people
 
-Total: 1309 people 
+Total: 1309 people
 
 Out of which the number of people that have not survived is 809 people
 and the number of people survived is 465 people.
 
-**Fields in the Dataset:** 
+**Fields in the Dataset:**
 
 |                                                                                      |
-|:--------------------------------------:|
+|:----------------------------------------------------------------------:|
 |                           Name: The name of the passenger.                           |
 |                            Sex: Gender of the passenger.                             |
 |                              Age: Age of the passenger.                              |
@@ -621,10 +583,10 @@ Multimodal Missing Data Imputation," 2021 IEEE EMBS International
 Conference on Biomedical and Health Informatics (BHI), Athens, Greece,
 2021, pp. 1-5, doi: 10.1109/BHI50953.2021.9508517.
 
-19) Getzen E;Ungar L;Mowery D;Jiang X;Long Q;, E. G., Ungar, L., Mowery
-, D., & Jiang, X. (n.d.). *Mining for Equitable Health: Assessing the
-impact of missing data in Electronic Health Records*. Journal of
-biomedical informatics. https://pubmed.ncbi.nlm.nih.gov/36621750/
+19) Getzen E;Ungar L;Mowery D;Jiang X;Long Q;, E. G., Ungar, L., Mowery
+    , D., & Jiang, X. (n.d.). *Mining for Equitable Health: Assessing
+    the impact of missing data in Electronic Health Records*. Journal of
+    biomedical informatics. https://pubmed.ncbi.nlm.nih.gov/36621750/
 
 20\) Robins, James M., and Richard D. Gill (1997) “Non-response models
 for the analysis of non-monotone ignorable missing data.” Statistics in
@@ -641,3 +603,7 @@ https://www.ncbi.nlm.nih.gov/pmc/articles/PMC4638176/
 23\) Zhang, Z. (2016b, June). *Introduction to machine learning:
 k-nearest neighbors*. National Library of Medicine .
 https://www.ncbi.nlm.nih.gov/pmc/articles/PMC4916348/
+
+24\) D. ROZIER, M., A. CROSS, D., & K. PATEL, K. (2021). Wiley Online
+Library \| Scientific Research Articles, journals, ...
+https://onlinelibrary.wiley.com/doi/full/10.1111/1468-0009.12545
