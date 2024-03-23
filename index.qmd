@@ -33,21 +33,21 @@ was not collected. There are three main types of missing data.
 unrelated to observed and unobserved variables. In other words, the
 probability of data being missing is the same for all observations.
 
-![](Example 1.png){width="698"}
+![](Example%201.png){width="698"}
 
 2\. **Missing at Random (MAR)**: The missingness is related to observed
 variables but not to the values of the missing data itself. In this
 case, the probability of data being missing can be predicted by other
 variables in the dataset.
 
-![](Example 2.png){width="699"}
+![](Example%202.png){width="699"}
 
 3\. **Missing Not at Random (MNAR)**: The missingness is related to the
 values of the missing data itself, even after considering observed
 variables. This type of missing data can introduce bias and is often
 more challenging to handle.
 
-![](Example 3.png)
+![](Example%203.png)
 
 ## Literature Review
 
@@ -69,7 +69,7 @@ dataset leads to incorrect computations, and incorrect output for the
 created pipelines leading to inaccurate predictions which could
 ultimately lead to the downfall of the business. Filling those missing
 data with substituted values is called data imputation. It is very
-important to handle missing values effectively during the process. \
+important to handle missing values effectively during the process.\
 \
 Data imputation is a technique that aims to replace the missing data
 with a substitute value. This technique can be applied when removing
@@ -124,7 +124,7 @@ of the column. This is also called mode imputation. The assumption
 regarding this technique is that the data is missing at random.
 [@ross2020complete]
 
-## Related work  
+## Related work
 
 #### Electronic Health Record (EHR)
 
@@ -172,7 +172,7 @@ Median Imputation: (M = \text{median}(X_1, X_2, ..., X_n))
 In both cases, missing values are replaced with the mean or median of
 the observed values in the variable (X)
 
-![](images/clipboard-3744689167.png){width="493"}
+![](mean%20imputation%20example.png){width="421"}
 
 Figure 1: Mean/Median Imputation Normal Distribution
 
@@ -202,7 +202,7 @@ estimates and standard errors.
 The imputation step often involves drawing imputed values from a
 predictive distribution based on observed data.
 
-![](images/clipboard-2077492971.png)
+![](multiple%20imputation%20example.png){width="554"}
 
 Figure 2: Missing data value replaced by several different values
 
@@ -224,10 +224,6 @@ for imputing values based on similarities in multivariate space.\
 \[X\_{\text{miss}} = \frac{1}{k} \sum\_{i=1}\^{k} X_i\] - Where (X_i)
 represents the observed values of the (k) nearest neighbors to the
 missing value.
-
-![](images/clipboard-2035736844.png){width="474"}
-
-Figure 3:
 
 **Most Frequent Value Imputation**
 
