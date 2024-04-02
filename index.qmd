@@ -330,7 +330,7 @@ and the number of people survived is 465 people.
 **Fields in the Dataset:**
 
 |                                                                                      |
-|:------------------------------------------------------------------------------------:|
+|:----------------------------------------------------------------------:|
 |                           Name: The name of the passenger.                           |
 |                            Sex: Gender of the passenger.                             |
 |                              Age: Age of the passenger.                              |
@@ -562,6 +562,86 @@ your_data <- read_excel("Titanic_dataset.xlsx")
 md.pattern(your_data)
  
 ```
+
+Missingness Pattern Plot
+```{r}
+library(VIM)
+
+# Display missing data pattern
+aggr(your_data, col = c("blue", "white"), numbers = TRUE, sortVars = TRUE, labels = names(your_data), cex.axis = 0.5, gap = 3, ylab = c("Histogram of missing data", "Pattern"))
+ 
+```
+
+Multiple Correspondence Analysis (MCA) Plot
+```{r}
+# Install FactoMineR package
+#install.packages("FactoMineR")
+
+# Load FactoMineR package
+library(FactoMineR)
+
+
+# Perform MCA
+mca_result <- MCA(your_data, graph = FALSE)
+
+# Plot MCA
+plot.MCA(mca_result)
+ 
+```
+
+Dendrogram of Variables
+```{r}
+#library(dendextend)
+
+# Create dendrogram based on missingness
+dend <- as.dendrogram(hclust(dist(is.na(your_data))))
+
+# Plot dendrogram
+plot(dend)
+ 
+```
+
+
+Density Plots Before and After Imputation
+```{r}
+# Install and load necessary packages
+#install.packages("mice")
+library(mice)
+
+# Load the Titanic dataset
+your_data <- read_excel("Titanic_dataset.xlsx")
+
+# Define the columns for imputation
+columns_to_impute <- c("age", "fare", "sibsp", "parch")
+
+# Perform imputation
+imputed_data <- complete(mice(your_data[, columns_to_impute], m = 1))
+
+# Create density plot before imputation
+par(mfrow = c(1, 2))
+plot(density(your_data$age, na.rm = TRUE), main = "Before Imputation", ylab = "Density", xlab = "Age")
+
+# Create density plot after imputation
+plot(density(imputed_data$age), main = "After Imputation", ylab = "Density", xlab = "Age")
+ 
+```
+
+Heatmap of Correlation Matrix:
+
+```{r}
+# Compute correlation matrix before and after imputation
+cor_before <- cor(your_data[, numeric_variables], use = "pairwise.complete.obs")
+cor_after <- cor(completed_data[, numeric_variables], use = "pairwise.complete.obs")
+
+# Create heatmaps
+par(mfrow = c(1, 2))
+heatmap(cor_before, main = "Before Imputation", xlab = "Variables", ylab = "Variables", col = heat.colors(10))
+
+
+heatmap(cor_after, main = "After Imputation", xlab = "Variables", ylab = "Variables", col = heat.colors(10))
+ 
+```
+
 
 ### Statistical Modeling
 
