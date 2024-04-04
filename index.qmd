@@ -50,6 +50,15 @@ more challenging to handle. [@umathe2015imputation]
 
 ![](Example%203.png)
 
+Data imputation is a technique that aims to replace the missing data
+with a substitute value. This technique can be applied when removing
+data from the dataset is not feasible. Due to reasons such as a
+reduction in the size of the dataset by a large extent. Reduction in
+this way can also raise concerns for biases and incorrect analysis,
+reduction can lead to distortion in the data variables and impact of the
+final model with biases. The goal is to restore the complete dataset and
+not lose any more of the data. [@allison2009missing]
+
 ## Literature Review
 
 Handling missing data is crucial in statistical analysis because it can
@@ -71,16 +80,7 @@ created pipelines leading to inaccurate predictions which could
 ultimately lead to the downfall of the business. Filling those missing
 data with substituted values is called data imputation. It is very
 important to handle missing values effectively during the process.
-[@kaiser2012algorithm]\
-\
-Data imputation is a technique that aims to replace the missing data
-with a substitute value. This technique can be applied when removing
-data from the dataset is not feasible. Due to reasons such as a
-reduction in the size of the dataset by a large extent. Reduction in
-this way can also raise concerns for biases and incorrect analysis,
-reduction can lead to distortion in the data variables and impact of the
-final model with biases. The goal is to restore the complete dataset and
-not lose any more of the data. [@allison2009missing]
+[@kaiser2012algorithm]
 
 An example of a single imputation method would be mean and median
 imputation. This method acts to replace the missing data with
@@ -155,9 +155,7 @@ Missing data can also be difficult because one sometimes cannot
 accurately identify the problem. Because of these issues researchers
 will design studies to try and minimize occurrences of missing data.
 
-## Related work
-
-#### Electronic Health Record (EHR)
+#### Other Applications: Electronic Health Record (EHR)
 
 The EHR has increasingly become used for data mining and analysis for a
 variety of health conditions. However, due to irregular observation
@@ -189,11 +187,6 @@ deleting the missing values and thus missing information. Depending on
 the data type, some methods are better than others at preserving
 variance and original distribution of the data. [@salgado2019missing]
 
-![](pathway%20for%20missing%20data%20handling%20image.png){width="430"}
-
-Figure 1: Pathway for Missing Data Handling. Image by Paresh Patil
-(2023)
-
 **Mean/Median Imputation\
 **This is simple single imputation method, one will take the average or
 common value and fill in for those missing values. This method has the
@@ -220,7 +213,7 @@ the observed values in the variable (X) [@jadhav2019comparison]
 ![](mean%20imputation%20example.png){width="421"}
 
 Figure 2: Mean/Median Imputation Normal Distribution. Image by Arun
-Amballa (2020)
+Amballa (2020) via medium.com
 
 **Multiple Imputation**
 
@@ -251,7 +244,7 @@ predictive distribution based on observed data. [@de2013multiple]
 ![](multiple%20imputation%20example.png){width="554"}
 
 Figure 3: Missing data value replaced by several different values .
-Image by Martijn W Heymans and Iris Eekhout (2019)
+Image by Martijn W Heymans and Iris Eekhout (2019) via bookdown.org
 
 **K-Nearest Neighbors (KNN) Imputation**
 
@@ -284,6 +277,8 @@ in the variable. - Application: Appropriate for categorical variables or
 when missing values are likely to be the mode. [@sessa2016techniques]
 
 ## Analysis and Results
+
+#### Data Description
 
 **Overview:** The Titanic dataset contains information about the
 passengers on board during the tragic event, categorizing them into
@@ -434,9 +429,6 @@ summary(completed_data)
 ```
 
 3.  **K-Nearest Neighbors (KNN) Imputation**
-
-Advanced technique that fills missing values via estimating them by the
-characteristics of similar neighboring data points.
 
 ```{r}
  # Install and load necessary packages
@@ -644,7 +636,6 @@ heatmap(cor_before, main = "Before Imputation", xlab = "Variables", ylab = "Vari
 heatmap(cor_after, main = "After Imputation", xlab = "Variables", ylab = "Variables", col = heat.colors(10))
  
 ```
-
 
 ### Conclusion
 
