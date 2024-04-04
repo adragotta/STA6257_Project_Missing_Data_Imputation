@@ -564,6 +564,7 @@ md.pattern(your_data)
 ```
 
 Missingness Pattern Plot
+
 ```{r}
 library(VIM)
 
@@ -573,6 +574,7 @@ aggr(your_data, col = c("blue", "white"), numbers = TRUE, sortVars = TRUE, label
 ```
 
 Multiple Correspondence Analysis (MCA) Plot
+
 ```{r}
 # Install FactoMineR package
 #install.packages("FactoMineR")
@@ -590,6 +592,7 @@ plot.MCA(mca_result)
 ```
 
 Dendrogram of Variables
+
 ```{r}
 #library(dendextend)
 
@@ -601,8 +604,8 @@ plot(dend)
  
 ```
 
-
 Density Plots Before and After Imputation
+
 ```{r}
 # Install and load necessary packages
 #install.packages("mice")
@@ -642,13 +645,6 @@ heatmap(cor_after, main = "After Imputation", xlab = "Variables", ylab = "Variab
  
 ```
 
-
-### Statistical Modeling
-
-```{r}
-
- 
-```
 
 ### Conclusion
 
