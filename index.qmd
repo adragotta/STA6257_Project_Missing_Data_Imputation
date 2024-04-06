@@ -349,6 +349,10 @@ and the number of people survived is 465 people.
 
 **1. Mean/Median Imputation**
 
+The code involves installing and loading the "tidyverse" package, which
+provides a variety of tools for data science jobs, as well as loading
+the "readxl" package for handling Excel files.
+
 ```{r, warning=FALSE, echo=T, message=FALSE}
 
 # Install and load necessary packages
@@ -357,6 +361,10 @@ and the number of people survived is 465 people.
 #install.packages("readxl")
 library(readxl)
 ```
+
+The code computes missing values for particular variables, specifies
+columns for imputation, reads the Titanic dataset, and produces counts.
+At present, the 'age' column missing 263 values.
 
 ```{r, warning=FALSE, echo=TRUE}
 
@@ -371,27 +379,49 @@ missing_cabin <- sum(is.na(your_data$cabin))
 missing_boat <- sum(is.na(your_data$boat))
 missing_body <- sum(is.na(your_data$body))
 missing_home_dest <- sum(is.na(your_data$home.dest))
+```
 
+The code indicates that 1014 m and 263 are missing values in "age"
+
+```{r}
 # Print the counts of missing values
-
 cat("Missing values in 'age':", missing_age, "\n")
 #Missing values in 'age': 263
+```
 
+The code shows that there are 823 missing values in the "boat" and 1014
+missing values in the "cabin."
+
+```{r}
 cat("Missing values in 'cabin':", missing_cabin, "\n")
 #Missing values in 'cabin': 1014 
+```
 
-cat("Missing values in 'boat':", missing_boat, "\n")
-#Missing values in 'boat': 823 
+The code shows 1188 missing values in the "body" and 823 missing values
+in the "boat."
 
+```{r}
 cat("Missing values in 'body':", missing_body, "\n")
 #Missing values in 'body': 1188 
+```
 
+```{r}
+cat("Missing values in 'boat':", missing_boat, "\n")
+#Missing values in 'boat': 823 
+```
+
+The code shows 564 missing values in the "home.dest"
+
+```{r}
 cat("Missing values in 'home.dest':", missing_home_dest, "\n")
-#Missing values in 'home.dest': 564   
-
+#Missing values in 'home.dest': 564  
 ```
 
 2.  **Multiple Imputation**
+
+The Titanic dataset is imported into the R, which then chooses which
+columns to imputation. Multiple imputation is then carried out using
+predictive mean matching, and the results are saved as imputed data.
 
 ```{r, warning=FALSE, echo=TRUE}
 # Install and load necessary packages
@@ -415,6 +445,13 @@ set.seed(123)
 # Perform multiple imputation
 imputed_data <- mice(imputation_data[, columns_to_impute], m = 5, method = 'pmm')
 
+```
+
+After completing the imputation using random forest and logistic
+regression techniques, the code saves the dataset and shows summary
+statistics for the imputed data.
+
+```{r}
 # Other imputation methods: 'logreg' for logistic regression, 'rf' for random forest
 
 # Complete the imputation process
@@ -425,10 +462,13 @@ write.xlsx(completed_data, "Imputed_Titanic_dataset_MultipleImputation.xlsx")
 
 # Display summary statistics of the imputed dataset
 summary(completed_data)
-
 ```
 
 3.  **K-Nearest Neighbors (KNN) Imputation**
+
+The code uses the aggr function from the VIM package to display the
+missing data pattern after loading the necessary packages and importing
+the Titanic dataset.
 
 ```{r}
  # Install and load necessary packages
@@ -443,6 +483,12 @@ your_data <- read_excel("Titanic_dataset.xlsx")
 # Display missing data pattern
 aggr(your_data, col = c("blue", "white"), numbers = TRUE, sortVars = TRUE, labels = names(your_data), cex.axis = 0.5, gap = 3, ylab = c("Histogram of missing data", "Pattern"))
 
+```
+
+The code uses the aggr function to display the missing data pattern
+following KNN imputation for the 'age' column.
+
+```{r}
 #Perform KNN imputation
 your_data_imputed <- kNN(your_data, variable = "age", k = 5)  # Replace "age" with the column you want to impute
 # Repeat the above line for each column you want to impute
@@ -450,14 +496,28 @@ your_data_imputed <- kNN(your_data, variable = "age", k = 5)  # Replace "age" wi
 # Display missing data pattern after imputation
 aggr(your_data_imputed, col = c("blue", "white"), numbers = TRUE, sortVars = TRUE, labels = names(your_data_imputed), cex.axis = 0.5, gap = 3, ylab = c("Histogram of missing data", "Pattern"))
 
+```
+
+The code stores the imputed dataset as
+"Imputed_Titanic_dataset_KNN.xlsx" and uses the summary function to
+produce summary statistics for the imputed data.
+
+```{r}
+
 # Save the imputed dataset if needed
 write.xlsx(your_data_imputed, "Imputed_Titanic_dataset_KNN.xlsx")
 
 # Display summary statistics of the imputed dataset
 summary(your_data_imputed)
+
 ```
 
 4.  **Most Frequent Value Imputation**
+
+The code imports the Titanic dataset, loads the required packages,
+defines columns that have missing data, and then imputation is performed
+using the column with the highest frequency value. After imputation, it
+shows the total number of missing values for every column.
 
 ```{r}
 # Load necessary packages
@@ -491,12 +551,82 @@ for (col in columns_with_missing) {
 missing_counts <- colSums(is.na(imputed_data))
 print("Missing values for each column after imputation:")
 "Missing values for each column after imputation:"
-print(missing_counts)
 ```
 
-Data Visualization
+Prints count of missing values for each column.
 
-Missingness Heatmap:
+```{r}
+print(missing_counts)
+ 
+```
+
+**Missing Variables gg_miss_var Plot:**
+
+This script displays which variables have contain the most missing
+variables in the titantic data via gg_miss_var function
+
+```{r}
+install.packages("naniar",repos = "http://cran.us.r-project.org")
+library("naniar")
+library(ggplot2)
+
+gg_miss_var(your_data) + labs(y = "Number of Missing")
+
+```
+
+**Missing Variables Percentage Plot:**
+
+This script is done via vis_mis function to display the percentage of
+missing data regarding the variables.
+
+```{r}
+vis_miss(your_data)
+
+```
+
+```{r}
+# Calculate proportion of missing values for each variable
+missing_proportion <- colSums(is.na(your_data)) / nrow(your_data)
+
+# Plot bar plot of missing proportion
+barplot(missing_proportion, main = "Proportion of Missing Data", xlab = "Variables", ylab = "Missing Proportion")
+```
+
+**Dendrogram of Variables:**
+
+The script uses the end extend package to plot the dendrogram based on
+missingness in the Titanic dataset.
+
+```{r}
+#library(dendextend)
+
+# Create dendrogram based on missingness
+dend <- as.dendrogram(hclust(dist(is.na(your_data))))
+
+# Plot dendrogram
+plot(dend)
+ 
+```
+
+**Missingness Pattern Plot:**
+
+The code in this file shows a histogram and pattern of missing values
+across variables in the Titanic dataset by utilizing the aggr function
+from the VIM package.
+
+```{r}
+library(VIM)
+
+# Display missing data pattern
+aggr(your_data, col = c("blue", "white"), numbers = TRUE, sortVars = TRUE, labels = names(your_data), cex.axis = 0.5, gap = 3, ylab = c("Histogram of missing data", "Pattern"))
+ 
+```
+
+**Missingness Heatmap:**
+
+The code shows patterns of missing data across variables by displaying a
+missingness heatmap of the Titanic dataset using the aggr function from
+the VIM package.
 
 ```{r}
 library(VIM)
@@ -506,28 +636,13 @@ aggr(your_data, col = c("pink", "blue"), numbers = TRUE, sortVars = TRUE, labels
  
 ```
 
-Bar Plot of Missing Data:
+### Data Visualization
 
-```{r}
-# Calculate proportion of missing values for each variable
-missing_proportion <- colSums(is.na(your_data)) / nrow(your_data)
+**Scatterplot Matrix:**
 
-# Plot bar plot of missing proportion
-barplot(missing_proportion, main = "Proportion of Missing Data", xlab = "Variables", ylab = "Missing Proportion")
- 
-```
-
-Histogram of Missing Data:
-
-```{r}
-# Calculate missing counts for each variable}
-missing_counts <- colSums(is.na(your_data))
-
-# Plot histogram of missing counts
-barplot(missing_counts, main = "Histogram of Missing Data", xlab = "Variables", ylab = "Missing Counts")
-```
-
-Scatterplot Matrix:
+Installing and loading the GGally package, choosing numerical variables,
+and utilizing the ggpairs function to construct a scatterplot matrix for
+analysis are all done by the code.
 
 ```{r}
 # Install and load GGally package
@@ -542,7 +657,10 @@ ggpairs(your_data[, numeric_variables])
  
 ```
 
-Missing Data Matrix
+**Missing Data Matrix:**
+
+The code uses the md.pattern function from the VIM package to display
+the missing data pattern in the Titanic dataset after loading it.
 
 ```{r}
 library(VIM)
@@ -550,22 +668,17 @@ library(VIM)
 # Load the Titanic dataset
 your_data <- read_excel("Titanic_dataset.xlsx")
 
+
 # Display missing data matrix
-md.pattern(your_data)
- 
+
+md.pattern(your_data, plot = TRUE, rotate.names = TRUE)
 ```
 
-Missingness Pattern Plot
+**Multiple Correspondence Analysis (MCA) Plot:**
 
-```{r}
-library(VIM)
-
-# Display missing data pattern
-aggr(your_data, col = c("blue", "white"), numbers = TRUE, sortVars = TRUE, labels = names(your_data), cex.axis = 0.5, gap = 3, ylab = c("Histogram of missing data", "Pattern"))
- 
-```
-
-Multiple Correspondence Analysis (MCA) Plot
+The code in this article demonstrates the results of Multiple
+Correspondence Analysis (MCA) on the Titanic dataset using the
+FactoMineR package.
 
 ```{r}
 # Install FactoMineR package
@@ -583,20 +696,14 @@ plot.MCA(mca_result)
  
 ```
 
-Dendrogram of Variables
+**Density Plots Before and After Imputation:**
 
-```{r}
-#library(dendextend)
-
-# Create dendrogram based on missingness
-dend <- as.dendrogram(hclust(dist(is.na(your_data))))
-
-# Plot dendrogram
-plot(dend)
- 
-```
-
-Density Plots Before and After Imputation
+The script uses the end extend package to plot the dendrogram based on
+missingness in the Titanic dataset. The code creates columns for
+imputation, import the Titanic dataset, loads the mice package, and then
+uses mice to do an imputation for a subset of the defined columns. After
+that, the imputation procedure is finished, and the imputed data is
+summarized.
 
 ```{r}
 # Install and load necessary packages
@@ -611,7 +718,15 @@ columns_to_impute <- c("age", "fare", "sibsp", "parch")
 
 # Perform imputation
 imputed_data <- complete(mice(your_data[, columns_to_impute], m = 1))
+ 
+```
 
+Two plots are laid out in the draft. It displays the distribution both
+before and after imputation by first creating a density plot for the
+'age' variable from the original dataset and then another density plot
+for the 'age' variable from the imputed dataset.
+
+```{r}
 # Create density plot before imputation
 par(mfrow = c(1, 2))
 plot(density(your_data$age, na.rm = TRUE), main = "Before Imputation", ylab = "Density", xlab = "Age")
@@ -621,7 +736,13 @@ plot(density(imputed_data$age), main = "After Imputation", ylab = "Density", xla
  
 ```
 
-Heatmap of Correlation Matrix:
+**Heatmap of Correlation Matrix:**
+
+For numerical variables, the script computes correlation matrices both
+before and after imputation and then generates heatmaps to show
+correlations. Correlations before imputation are shown in the "Before
+Imputation" heatmap. After imputation, the script creates a heatmap that
+shows correlations and the relationship between the variables.
 
 ```{r}
 # Compute correlation matrix before and after imputation
@@ -637,7 +758,32 @@ heatmap(cor_after, main = "After Imputation", xlab = "Variables", ylab = "Variab
  
 ```
 
+**Violin Plots Before and After Imputation:**
+
+This code depicts entire distribution of numeric data between titanic
+variables.
+
+```{r}
+library(ggplot2)
+ggplot() +
+  geom_violin(data = your_data, aes(x = "", y = age), fill = "yellow") +
+  geom_violin(data = completed_data, aes(x = "", y = age), fill = "purple") +
+  labs(title = "Violin Plots Before and After Imputation", x = "", y = "Age") +
+  theme_minimal()
+```
+
 ### Conclusion
+
+The purpose of addressing missing data and performing analysis on the
+Titanic dataset, the supplied R scripts give a thorough method. They
+include imputation techniques like KNN, Most Frequent Value, and
+Multiple Imputation. They also display patterns in missing data, values
+that have been imputed, and variations in the distribution of data both
+before and after imputation. Data structure and relationships can be
+understood through exploratory approaches like correlation analysis and
+multiple correspondence analysis (MCA). Together, these analyses improve
+data quality, simplify data preprocessing, and allow for better-informed
+decision-making in later modeling and analysis activities.
 
 In conclusion, the project on missing data and imputation using
 R-Language has provided a thorough exploration of diverse techniques for
