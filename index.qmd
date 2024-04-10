@@ -345,6 +345,7 @@ and the number of people survived is 465 people.
 |  Body: Identification numbers of recovered bodies are missing for some passengers.   |
 | Home.Dest: Information about the home or destination is missing for some passengers. |
 
+
 **Missing Variables Plot:s**
 
 This script displays which variables have contain the most missing
@@ -358,15 +359,12 @@ variables in the titantic data via gg_miss_var function
 #install.packages("readxl")
 library(readxl)
 your_data <- read_excel("Titanic_dataset.xlsx")
-```
 
-```{r}
 install.packages("naniar",repos = "http://cran.us.r-project.org")
 library("naniar")
 library(ggplot2)
 
 gg_miss_var(your_data) + labs(y = "Number of Missing Values")
-
 ```
 
 This script is done via vis_mis function to display the percentage of
@@ -385,15 +383,17 @@ gg_miss_which(your_data)
 ```
 #### Pattern of Missing Data
 
-Upon viewing visualizations of the missing data distribution. One can
-see certain fields contain the most missing values. These fields such as
-body, cabin, boat, age and home.dest. One can also observe from the
-plots from the titantic dataset that 79% of the data is present and 21%
-is missing. The missing variables percentage plot displays the
-percentage for the certain variables. fields with the most missing data
-belonging to the body variable. One could consider that the variables
-such as body may be influenced by another factor when hypothesizing what
-kind of missing data type each of these fields belong to.
+Upon viewing the visualizations of the missing data distribution for the
+titanic data set. One can see certain fields contain the most missing
+values. These fields such as body, cabin, boat, age and home.dest. The
+missing variables percentage plot displays these percentages for the
+certain variables. One can also observe from the titatanic data set
+plots that overall 79% of the data is present and 21% is missing.
+Specifically, the body variable contains data which 91% is missing,
+followed by cabin 77% and boat 63%. One could consider that the
+variables such as body may be influenced by another factor when
+hypothesizing what kind of missing data type each of these fields belong
+to and what imputation methods one could apply.
 
 
 **1. Mean/Median Imputation**
@@ -520,7 +520,7 @@ missing data pattern after loading the necessary packages and importing
 the Titanic dataset. White indicates missing.
 
 ```{r}
- # Install and load necessary packages
+# Install and load necessary packages
 # install.packages("readxl")
 #install.packages("VIM")
 library(readxl)
