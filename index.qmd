@@ -203,9 +203,7 @@ the variable
 
 The mean() and median() functions in R can be used for this method.
 
-Mean Imputation: (\bar{X} = \frac{\sum_{i=1}^{n} X_i}{n})
-
-Median Imputation: (M = \text{median}(X_1, X_2, ..., X_n))
+![](Screenshot%202024-04-10%20154406.png)
 
 In both cases, missing values are replaced with the mean or median of
 the observed values in the variable (X) [@jadhav2019comparison]
@@ -347,10 +345,10 @@ and the number of people survived is 465 people.
 |  Body: Identification numbers of recovered bodies are missing for some passengers.   |
 | Home.Dest: Information about the home or destination is missing for some passengers. |
 
-#### 
+**Missing Variables Plot:s**
 
-
-**Missing Variables gg_miss_var Plot:**
+This script displays which variables have contain the most missing
+variables in the titantic data via gg_miss_var function
 
 ```{r, warning=FALSE, echo=T, message=FALSE}
 
@@ -362,19 +360,14 @@ library(readxl)
 your_data <- read_excel("Titanic_dataset.xlsx")
 ```
 
-This script displays which variables have contain the most missing
-variables in the titantic data via gg_miss_var function
-
 ```{r}
 install.packages("naniar",repos = "http://cran.us.r-project.org")
 library("naniar")
 library(ggplot2)
 
-gg_miss_var(your_data) + labs(y = "Number of Missing")
+gg_miss_var(your_data) + labs(y = "Number of Missing Values")
 
 ```
-
-**Missing Variables Percentage Plot:**
 
 This script is done via vis_mis function to display the percentage of
 missing data regarding the variables.
@@ -384,17 +377,24 @@ vis_miss(your_data)
 
 ```
 
-**Missing Variables Barplot:**
-
-The code creates a bar plot of the variables' missing value proportions.
+The code creates a plot that displays if there is a missing element in
+the dataset's columns. Grey indicating that there is a missing element.
 
 ```{r}
-# Calculate proportion of missing values for each variable
-missing_proportion <- colSums(is.na(your_data)) / nrow(your_data)
-
-# Plot bar plot of missing proportion
-barplot(missing_proportion, main = "Proportion of Missing Data", xlab = "Variables", ylab = "Missing Proportion")
+gg_miss_which(your_data)
 ```
+#### Pattern of Missing Data
+
+Upon viewing visualizations of the missing data distribution. One can
+see certain fields contain the most missing values. These fields such as
+body, cabin, boat, age and home.dest. One can also observe from the
+plots from the titantic dataset that 79% of the data is present and 21%
+is missing. The missing variables percentage plot displays the
+percentage for the certain variables. fields with the most missing data
+belonging to the body variable. One could consider that the variables
+such as body may be influenced by another factor when hypothesizing what
+kind of missing data type each of these fields belong to.
+
 
 **1. Mean/Median Imputation**
 
@@ -517,7 +517,7 @@ summary(completed_data)
 
 The code uses the aggr function from the VIM package to display the
 missing data pattern after loading the necessary packages and importing
-the Titanic dataset.
+the Titanic dataset. White indicates missing.
 
 ```{r}
  # Install and load necessary packages
@@ -533,7 +533,6 @@ your_data <- read_excel("Titanic_dataset.xlsx")
 aggr(your_data, col = c("blue", "white"), numbers = TRUE, sortVars = TRUE, labels = names(your_data), cex.axis = 0.5, gap = 3, ylab = c("Histogram of missing data", "Pattern"))
 
 ```
-
 
 4.  **Most Frequent Value Imputation**
 
@@ -583,7 +582,6 @@ print(missing_counts)
  
 ```
 
-
 ### Data Visualization
 
 **Scatterplot Matrix:**
@@ -604,7 +602,6 @@ numeric_variables <- c("age", "fare", "sibsp", "parch")
 ggpairs(your_data[, numeric_variables])
  
 ```
-
 
 **Multiple Correspondence Analysis (MCA) Plot:**
 
