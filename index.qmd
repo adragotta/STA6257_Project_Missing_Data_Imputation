@@ -347,6 +347,55 @@ and the number of people survived is 465 people.
 |  Body: Identification numbers of recovered bodies are missing for some passengers.   |
 | Home.Dest: Information about the home or destination is missing for some passengers. |
 
+#### 
+
+
+**Missing Variables gg_miss_var Plot:**
+
+```{r, warning=FALSE, echo=T, message=FALSE}
+
+# Install and load necessary packages
+#install.packages("tidyverse")
+#library(tidyverse)
+#install.packages("readxl")
+library(readxl)
+your_data <- read_excel("Titanic_dataset.xlsx")
+```
+
+This script displays which variables have contain the most missing
+variables in the titantic data via gg_miss_var function
+
+```{r}
+install.packages("naniar",repos = "http://cran.us.r-project.org")
+library("naniar")
+library(ggplot2)
+
+gg_miss_var(your_data) + labs(y = "Number of Missing")
+
+```
+
+**Missing Variables Percentage Plot:**
+
+This script is done via vis_mis function to display the percentage of
+missing data regarding the variables.
+
+```{r}
+vis_miss(your_data)
+
+```
+
+**Missing Variables Barplot:**
+
+The code creates a bar plot of the variables' missing value proportions.
+
+```{r}
+# Calculate proportion of missing values for each variable
+missing_proportion <- colSums(is.na(your_data)) / nrow(your_data)
+
+# Plot bar plot of missing proportion
+barplot(missing_proportion, main = "Proportion of Missing Data", xlab = "Variables", ylab = "Missing Proportion")
+```
+
 **1. Mean/Median Imputation**
 
 The code involves installing and loading the "tidyverse" package, which
@@ -485,32 +534,6 @@ aggr(your_data, col = c("blue", "white"), numbers = TRUE, sortVars = TRUE, label
 
 ```
 
-The code uses the aggr function to display the missing data pattern
-following KNN imputation for the 'age' column.
-
-```{r}
-#Perform KNN imputation
-your_data_imputed <- kNN(your_data, variable = "age", k = 5)  # Replace "age" with the column you want to impute
-# Repeat the above line for each column you want to impute
-
-# Display missing data pattern after imputation
-aggr(your_data_imputed, col = c("blue", "white"), numbers = TRUE, sortVars = TRUE, labels = names(your_data_imputed), cex.axis = 0.5, gap = 3, ylab = c("Histogram of missing data", "Pattern"))
-
-```
-
-The code stores the imputed dataset as
-"Imputed_Titanic_dataset_KNN.xlsx" and uses the summary function to
-produce summary statistics for the imputed data.
-
-```{r}
-
-# Save the imputed dataset if needed
-write.xlsx(your_data_imputed, "Imputed_Titanic_dataset_KNN.xlsx")
-
-# Display summary statistics of the imputed dataset
-summary(your_data_imputed)
-
-```
 
 4.  **Most Frequent Value Imputation**
 
@@ -560,85 +583,6 @@ print(missing_counts)
  
 ```
 
-**Missing Variables gg_miss_var Plot:**
-
-This script displays which variables have contain the most missing
-variables in the titantic data via gg_miss_var function
-
-```{r}
-install.packages("naniar",repos = "http://cran.us.r-project.org")
-library("naniar")
-library(ggplot2)
-
-gg_miss_var(your_data) + labs(y = "Number of Missing")
-
-```
-
-**Missing Variables Percentage Plot:**
-
-This script is done via vis_mis function to display the percentage of
-missing data regarding the variables.
-
-```{r}
-vis_miss(your_data)
-
-```
-
-**Missing Variables Barplot:**
-
-The code creates a bar plot of the variables' missing value proportions.
-
-```{r}
-# Calculate proportion of missing values for each variable
-missing_proportion <- colSums(is.na(your_data)) / nrow(your_data)
-
-# Plot bar plot of missing proportion
-barplot(missing_proportion, main = "Proportion of Missing Data", xlab = "Variables", ylab = "Missing Proportion")
-```
-
-**Dendrogram of Variables:**
-
-The script uses the end extend package to plot the dendrogram based on
-missingness in the Titanic dataset.
-
-```{r}
-#library(dendextend)
-
-# Create dendrogram based on missingness
-dend <- as.dendrogram(hclust(dist(is.na(your_data))))
-
-# Plot dendrogram
-plot(dend)
- 
-```
-
-**Missingness Pattern Plot:**
-
-The code in this file shows a histogram and pattern of missing values
-across variables in the Titanic dataset by utilizing the aggr function
-from the VIM package.
-
-```{r}
-library(VIM)
-
-# Display missing data pattern
-aggr(your_data, col = c("blue", "white"), numbers = TRUE, sortVars = TRUE, labels = names(your_data), cex.axis = 0.5, gap = 3, ylab = c("Histogram of missing data", "Pattern"))
- 
-```
-
-**Missingness Heatmap:**
-
-The code shows patterns of missing data across variables by displaying a
-missingness heatmap of the Titanic dataset using the aggr function from
-the VIM package.
-
-```{r}
-library(VIM)
-
-# Display missingness heatmap
-aggr(your_data, col = c("pink", "blue"), numbers = TRUE, sortVars = TRUE, labels = names(your_data), cex.axis = 0.5, gap = 3, ylab = c("Histogram of missing data", "Pattern"))
- 
-```
 
 ### Data Visualization
 
@@ -661,22 +605,6 @@ ggpairs(your_data[, numeric_variables])
  
 ```
 
-**Missing Data Matrix:**
-
-The code uses the md.pattern function from the VIM package to display
-the missing data pattern in the Titanic dataset after loading it.
-
-```{r}
-library(VIM)
-
-# Load the Titanic dataset
-your_data <- read_excel("Titanic_dataset.xlsx")
-
-
-# Display missing data matrix
-
-md.pattern(your_data, plot = TRUE, rotate.names = TRUE)
-```
 
 **Multiple Correspondence Analysis (MCA) Plot:**
 
