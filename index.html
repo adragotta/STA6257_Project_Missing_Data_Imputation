@@ -7,7 +7,7 @@
 <meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=yes">
 
 <meta name="author" content="Vyshnavi Nammi, Dheeraj Reddy Podduturi, Ruchith Chippari, Anna Dragotta">
-<meta name="dcterms.date" content="2024-04-10">
+<meta name="dcterms.date" content="2024-04-13">
 
 <title>Advanced Techniques for Missing Data Handling</title>
 <style>
@@ -3114,7 +3114,7 @@ vertical-align: -.125em;
     <div>
     <div class="quarto-title-meta-heading">Published</div>
     <div class="quarto-title-meta-contents">
-      <p class="date">April 10, 2024</p>
+      <p class="date">April 13, 2024</p>
     </div>
   </div>
   
@@ -3151,7 +3151,7 @@ vertical-align: -.125em;
 <p>Overall it’s important to understand the reasons behind why data is missing. This allows the rest of the data to be handled correctly. One can conclude that if the data is missing completely at random (MCAR) one likely still has data that is representative of the population. Although if the data is missing systematically, one can infer the analysis could be potentially biased. This data bias can be described as when the values or information is limited in some manner <span class="citation" data-cites="westreich2012berkson">(<a href="#ref-westreich2012berkson" role="doc-biblioref">Westreich 2012</a>)</span>. Missing data additionally reduces statistical power and leads to invalid conclusions. Statistical power is the ability to detect an effect when utilizing a significance test. A low power can imply the test has a smaller chance of detecting a true effect. Or it may imply results are distorted via systematic or random error <span class="citation" data-cites="davey2009statistical">(<a href="#ref-davey2009statistical" role="doc-biblioref">Davey et al. 2009</a>)</span>. Missing data can also be difficult because one sometimes cannot accurately identify the problem. Because of these issues researchers will design studies to try and minimize occurrences of missing data.</p>
 <section id="other-applications-electronic-health-record-ehr" class="level4">
 <h4 class="anchored" data-anchor-id="other-applications-electronic-health-record-ehr">Other Applications: Electronic Health Record (EHR)</h4>
-<p>The EHR has increasingly become used for data mining and analysis for a variety of health conditions. However, due to irregular observation times and innate uncertainties in a medical setting, the EHR datasets are missing values. The EHR systems were not created in mind for research. Researchers who do use this data may categorize this missing data as missing completely at random, missing at random, or not missing at random. (Marino et al. 2021) Regarding missing completely at random (MCAR) data, all of the data points have the same odds to be missing. Missing at random is attributable to things like the patient’s condition, which means the missingness of the data is independent of the value of the data. Not missing random data completely depends on the value of the data. For each of these categories, the level of bias can be different <span class="citation" data-cites="jazayeri2020imputation">(<a href="#ref-jazayeri2020imputation" role="doc-biblioref">Jazayeri, Liang, and Yang 2020</a>)</span>.</p>
+<p>The EHR has increasingly become used for data mining and analysis for a variety of health conditions. However, due to irregular observation times and innate uncertainties in a medical setting, the EHR datasets are missing values. The EHR systems were not created in mind for research. Researchers who do use this data may categorize this missing data as missing completely at random, missing at random, or not missing at random. Regarding missing completely at random (MCAR) data, all of the data points have the same odds to be missing. Missing at random is attributable to things like the patient’s condition, which means the missingness of the data is independent of the value of the data. Not missing random data completely depends on the value of the data. For each of these categories, the level of bias can be different <span class="citation" data-cites="jazayeri2020imputation">(<a href="#ref-jazayeri2020imputation" role="doc-biblioref">Jazayeri, Liang, and Yang 2020</a>)</span>.</p>
 <p>Additionally it is something to consider that the EHR can reflect health inequity. Patients who belong to different groups may have different amounts of data in their health record. This can also result in biases in the data collection process. Missing data can also be caused by fragmented care in certain under-served groups. This results in the data being collected to be less informative <span class="citation" data-cites="rozier2022electronic">(<a href="#ref-rozier2022electronic" role="doc-biblioref">Rozier, Patel, and Cross 2022</a>)</span>.</p>
 </section>
 </section>
