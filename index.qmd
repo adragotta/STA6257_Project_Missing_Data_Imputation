@@ -75,7 +75,7 @@ at random.
 
 -   KNN Imputation
 
--   Most Frequent Value Imputation.
+-   Most Frequent Value Imputation
 
 ## **Mean and Median Imputation Methods**
 
