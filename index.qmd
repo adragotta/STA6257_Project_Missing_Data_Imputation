@@ -41,7 +41,7 @@ data with a substitute value.
 
 ## Missing Not at Random (MNAR)
 
-![](Example%203.png){width="627"}
+![](Example 3.png){width="742"}
 
 ## **Importance of Missing Data**
 
