@@ -33,17 +33,17 @@ data with a substitute value.
 
 ## Missing Completely at Random (MCAR)
 
-![](Example%201.png){width="788"}
+![](Example%201.png){width="706"}
 
 ## Missing at Random (MAR)
 
-![](Example%202.png){width="706"}
+![](Example%202.png){width="609"}
 
 ## Missing Not at Random (MNAR)
 
-![](Example%203.png){width="714"}
+![](Example%203.png){width="627"}
 
-## **Importance of Missing data**
+## **Importance of Missing Data**
 
 Handling missing data helps to prevent biased or sub-optimal outcomes
 and mishandling leads to inaccuracy of analysis.\
