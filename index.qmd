@@ -1,8 +1,10 @@
 ---
 title: "Advanced Techniques for Missing Data Handling"
 author: "Vyshnavi Nammi, Dheeraj Reddy Podduturi, Ruchith Chippari, Anna Dragotta"
+date: '`r Sys.Date()`'
 format:
-  revealjs
+  html:
+    code-fold: true
 course: STA 6257 - Advanced Statistical Modeling
 bibliography: references.bib # file contains bibtex for references
 #always_allow_html: true # this allows to get PDF with HTML features
@@ -17,45 +19,143 @@ editor:
 
 ## Introduction
 
-**Missing Data:** Missing data refers to missing values for certain
-observations or variables in a dataset.
+### **What is “Missing Data and Data Imputation”?**
 
-**Types of Missing Data**
+Missing data refers to missing values for certain observations or
+variables in a dataset. When collecting or recording data, it is not
+uncommon to encounter situations where information is not available for
+every individual or specific variable. Missing data can occur for
+various reasons, such as non-response by participants, data entry
+errors, equipment malfunctions, or simply because certain information
+was not collected. There are three main types of missing data
+[@little2019statistical].
 
-1.  Missing Completely at Random (MCAR)
+1\. **Missing Completely at Random (MCAR)**: Data missingness is
+unrelated to observed and unobserved variables. In other words, the
+probability of data being missing is the same for all observations.
 
-2.  Missing at Random (MAR)
+![](Example%201.png){width="698"}
 
-3.  Missing Not at Random (MNAR)
+2\. **Missing at Random (MAR)**: The missingness is related to observed
+variables but not to the values of the missing data itself. In this
+case, the probability of data being missing can be predicted by other
+variables in the dataset [@seaman2013meant].
 
-**Data Imputation:** It is a technique that aims to replace the missing
-data with a substitute value.
+![](Example%202.png){width="699"}
 
-## Missing Completely at Random (MCAR)
+3\. **Missing Not at Random (MNAR)**: The missingness is related to the
+values of the missing data itself, even after considering observed
+variables. This type of missing data can introduce bias and is often
+more challenging to handle [@umathe2015imputation].
 
-![](Example%201.png){width="706"}
+![](Example%203.png)
 
-## Missing at Random (MAR)
+**Data imputation** is a technique that aims to replace the missing data
+with a substitute value. This technique can be applied when removing
+data from the dataset is not feasible. Due to reasons such as a
+reduction in the size of the dataset by a large extent. Reduction in
+this way can also raise concerns for biases and incorrect analysis,
+reduction can lead to distortion in the data variables and impact of the
+final model with biases. The goal is to restore the complete dataset and
+not lose any more of the data [@allison2009missing].
 
-![](Example%202.png){width="609"}
+## Literature Review
 
-## Missing Not at Random (MNAR)
+Handling missing data is crucial in statistical analysis because it can
+lead to biased or inefficient results if not addressed properly.
+Researchers employ various techniques, such as imputation methods, to
+estimate or replace the missing values and ensure the validity and
+reliability of their analyses. Imputation involves filling in missing
+values with plausible estimates based on the observed data or using
+statistical models to predict missing values. Researchers need to be
+aware of the nature and mechanisms of missing data in their datasets, as
+the choice of imputation method depends on these factors. Ignoring
+missing data or handling it incorrectly can impact the accuracy and
+generalizability of study findings [@kang2013prevention].
 
-![](Example 3.png){width="742"}
+A dataset in which some of the data is missing and disrupts the
+completeness of the data is known as missing data. The missing data in a
+dataset leads to incorrect computations, and incorrect output for the
+created pipelines leading to inaccurate predictions which could
+ultimately lead to the downfall of the business. Filling those missing
+data with substituted values is called data imputation. It is very
+important to handle missing values effectively during the process
+[@kaiser2012algorithm].
 
-## **Importance of Missing Data**
+An example of a single imputation method would be mean and median
+imputation. This method acts to replace the missing data with
+statistical approximations of the missing data. The main object of this
+being to create a complete dataset [@pigott2001review]. In the method
+one will see these missing values replaced by the mean or median,
+depending on if the distribution is normal or skewed. If normal one
+could use mean imputation and if skewed one could utilize median
+imputation. Assumptions regarding this method would be that the data is
+missing completely at random (MCAR). Advantages of the mean/median
+method are also it's simple and quick regarding obtaining the complete
+dataset. Disadvantages of the mean/median method are that it distorts
+the original variance as well as the covariance regarding variables
+left-over in the dataset [@zhang2016missing].
 
-Handling missing data helps to prevent biased or sub-optimal outcomes
-and mishandling leads to inaccuracy of analysis.\
-\
-**Impact of Missing Data on Statistical Analysis**
+There is also a simple missing data handling method such as deletion.
+This involves removing rows or columns in the dataset. Which can be done
+via drop_na() or na.omit(). Some advantages of this method would be the
+easy of use along with reducing the dataset's size and complexity.
+Replacing missing data with certain values can cause errors or biases.
+This method may also help to preserve the original distribution of the
+data as well as the variance. Disadvantages of the deletion method would
+be possible loss of valuable information and reduction of the dataset's
+sample size. If the values deleted were not random or independent this
+can cause distortion and introduce bias. Thus the data becomes less
+informative and inaccurate. Alternatives to this are other missing data
+handling methods such as imputation [@baraldi2010introduction].
 
-Reduced statistical power and invalid conclusions
+Another technique is multiple imputation. This imputation method is an
+approach to missing data applied to common statistical packages.
+Multiple imputation is used to allow for the uncertainty of the missing
+data via creating many different plausible imputed datasets and
+appropriately mixing results produced from each of them
+[@sinharay2001use]. The first step is to create multiple copies of the
+dataset with the missing values substituted via the imputed values since
+we can never know the true values of the missing data, this imputation
+course of action should capture fully all uncertainty in foreseeing the
+missing values by inserting appropriate variability into the multiple
+imputed values. The second stage is to utilize a standard statistical
+method. This method should fit the model of interest for each of the
+datasets that experienced imputation [@sterne2009multiple].
 
-**\
-Methods of Handling Missing Data**: Imputation and Data Removal
+Other imputation techniques consist of complete case analysis (CCA),
+arbitrary value imputation, and frequent category imputation. Complete
+case analysis involves directly removing the rows that have missing
+data. This is also known as a listwise deletion. The assumption is the
+data is missing at random (MAR). Arbitrary value imputation involves
+handling both numerical and categorical variables [@white2010bias]. This
+technique additionally includes grouping the missing values in a column
+and then a value far from the range of the column. The values could be
+999999, - 999999, missing or not defined. The assumption for this
+technique is the data is not missing at random. Furthermore, frequent
+category imputation is a technique that replaces the missing value with
+the variable that has the highest frequency, meaning one replaces the
+value with the mode of the column. This is also called mode imputation.
+The assumption regarding this technique is that the data is missing at
+random [@ross2020complete].
 
-## Other Applications: Electronic Health Record (EHR)
+Overall it's important to understand the reasons behind why data is
+missing. This allows the rest of the data to be handled correctly. One
+can conclude that if the data is missing completely at random (MCAR) one
+likely still has data that is representative of the population. Although
+if the data is missing systematically, one can infer the analysis could
+be potentially biased. This data bias can be described as when the
+values or information is limited in some manner [@westreich2012berkson].
+Missing data additionally reduces statistical power and leads to invalid
+conclusions. Statistical power is the ability to detect an effect when
+utilizing a significance test. A low power can imply the test has a
+smaller chance of detecting a true effect. Or it may imply results are
+distorted via systematic or random error [@davey2009statistical].
+Missing data can also be difficult because one sometimes cannot
+accurately identify the problem. Because of these issues researchers
+will design studies to try and minimize occurrences of missing data.
+
+#### Other Applications: Electronic Health Record (EHR)
 
 The EHR has increasingly become used for data mining and analysis for a
 variety of health conditions. However, due to irregular observation
@@ -63,242 +163,570 @@ times and innate uncertainties in a medical setting, the EHR datasets
 are missing values. The EHR systems were not created in mind for
 research. Researchers who do use this data may categorize this missing
 data as missing completely at random, missing at random, or not missing
-at random.
+at random. Regarding missing completely at random (MCAR) data, all of
+the data points have the same odds to be missing. Missing at random is
+attributable to things like the patient’s condition, which means the
+missingness of the data is independent of the value of the data. Not
+missing random data completely depends on the value of the data. For
+each of these categories, the level of bias can be different
+[@jazayeri2020imputation].
+
+Additionally it is something to consider that the EHR can reflect health
+inequity. Patients who belong to different groups may have different
+amounts of data in their health record. This can also result in biases
+in the data collection process. Missing data can also be caused by
+fragmented care in certain under-served groups. This results in the data
+being collected to be less informative [@rozier2022electronic].
 
 ## Methods
 
-**Types of Imputation Methods**
+When confronted with missing data there are 2 primary pathways to handle
+the missing data. This is either imputation or data removal. Imputation
+substitues estimates for missing values. Removal of the data is to
+deleting the missing values and thus missing information. Depending on
+the data type, some methods are better than others at preserving
+variance and original distribution of the data [@salgado2019missing].
 
--   Mean/Median Imputation
+**Mean/Median Imputation\
+**This is simple single imputation method, one will take the average or
+common value and fill in for those missing values. This method has the
+assumption data is missing completely at random (MCAR) so one could
+apply this method to MCAR data. Mean imputation should be utlizied when
+distribution is normal and median imputation if distribution of data is
+skewed. This method can also artificially reduce variability of data.
+When one has a of missing data to fill in and you fill in with the exact
+same value. Variance and standard deviation decreases which is not
+necessarily desirable.
 
--   Multiple Imputation
+Replace missing values with the mean or median of the observed values in
+the variable
 
--   KNN Imputation
+The mean() and median() functions in R can be used for this method.
 
--   Most Frequent Value Imputation
+![](Screenshot%202024-04-10%20154406.png)
 
-## **Mean and Median Imputation Methods**
+In both cases, missing values are replaced with the mean or median of
+the observed values in the variable (X) [@jadhav2019comparison]
 
-This is simple single imputation method, one will take the average or
-common value and fill in for those missing values.
-
-![](mean%20imputation%20example.png){width="383"}
+![](mean%20imputation%20example.png){width="421"}
 
 Figure 1: Mean/Median Imputation Normal Distribution. Image by Arun
 Amballa (2020) via medium.com
 
-## 
+**Multiple Imputation**
 
-### **Mean Imputation**
-
-1.  Mean Imputation Suitable for normal distributions
-2.  Data Missing at random
-3.  Leads to biased estimates.
-
-### **Median Imputation**
-
-1.  Median imputation is suitable for skewed distributions.
-2.  It can lead to decreased variance and standard deviation
-
-## **Multiple Imputation**
+Instead of inputting a single value for the missing value. Multiple
+imputations attempts to input multiple values into the missing value and
+run analysis with completed data sets in all those cases, then average
+the results to get an unbiased estimate [@wayman2003multiple].
 
 -   Generate multiple sets of plausible values for each missing data
-    point.
+    point, considering the uncertainty associated with imputation.
+    -   The `mice` (Multivariate Imputation by Chained Equations)
+        package in R is commonly used for multiple imputation.
 
--   Package used in this method is `mice` (Multivariate Imputation by
-    Chained Equations)
+The multiple imputation process involves three steps:
 
-    ![](multiple%20imputation%20example.png){width="464"}
+a\) Imputation (m times): Generate (m) imputed datasets, where missing
+values are filled using a specified imputation method.
 
-    Figure 2: Missing data value replaced by several different values.
-    Image by Martijn W Heymans and Iris Eekhout (2019) via bookdown.org
+b\) Analysis (m times): Analyze each imputed dataset separately using
+the desired statistical analysis.
 
-## Steps Involved in Multiple Imputation Technique:
-
-**Imputation :** generate imputed datasets, where missing values are
-filled using a specified imputation method.
-
-**Analysis :** analyze each imputed dataset separately using the desired
-statistical analysis.
-
-**Pooling:** combine the results from the analyses to obtain final
+c\) Pooling: Combine the results from the (m) analyses to obtain final
 estimates and standard errors.
 
-## **K-Nearest Neighbors (KNN) Imputation**
+The imputation step often involves drawing imputed values from a
+predictive distribution based on observed data [@de2013multiple].
 
--   Impute missing values based on the values of their nearest neighbors
-    in the dataset.
+![](multiple%20imputation%20example.png){width="554"}
 
--   The `impute.knn()` function in the `impute` package is a popular
-    choice for KNN imputation.
+Figure 2: Missing data value replaced by several different values .
+Image by Martijn W Heymans and Iris Eekhout (2019) via bookdown.org
 
--   Method: impute missing values by averaging or using the majority
-    vote of the (k) nearest neighbors in the feature space.
+**K-Nearest Neighbors (KNN) Imputation**
 
--   Application: effective for imputing values based on similarities in
-    multivariate space.
+Advanced technique that fills missing values via estimating them by the
+characteristics of similar neighboring data points.
 
-## **Most Frequent Value Imputation**
+Impute missing values based on the values of their nearest neighbors in
+the dataset.
 
--   Also known as mode imputation
+The `impute.knn()` function in the `impute` package is a popular choice
+for KNN imputation.
 
--   Method: replace missing values with the most frequently occurring
-    value in the variable.
+Method: Impute missing values by averaging or using the majority vote of
+the (k) nearest neighbors in the feature space. - Application: Effective
+for imputing values based on similarities in multivariate space.\
+- For each missing value (X\_{\text{miss}}) in a variable (X):
+\[X\_{\text{miss}} = \frac{1}{k} \sum\_{i=1}\^{k} X_i\] - Where (X_i)
+represents the observed values of the (k) nearest neighbors to the
+missing value [@kramer2013k].
 
--   Application: appropriate for categorical variables or when missing
-    values are likely to be the mode.
+**Most Frequent Value Imputation**
+
+Also known as mode imputation, this is when the most frequent value
+replaces the missing values.This can be the most frequent value or most
+frequent category. This also may enable over-representation of the
+frequent variable.
+
+Method: Replace missing values with the most frequently occurring value
+in the variable. - Application: Appropriate for categorical variables or
+when missing values are likely to be the mode [@sessa2016techniques].
 
 ## Analysis and Results
 
 #### Data Description
 
--   Titanic dataset: 809 fatalities, 465 survivors, missing data in
-    various fields.
+**Overview:** The Titanic dataset contains information about the
+passengers on board during the tragic event, categorizing them into
+three classes (1, 2, and 3). In total, there were 1309 people on board,
+with Class 1 having 200 people, Class 2 having 119 people, and Class 3
+having 181 people. The dataset provides valuable insights into the
+demographics, relationships, and circumstances of the passengers aboard
+the Titanic during its ill-fated journey. The missing information in
+certain fields may require careful handling during analysis to ensure
+accurate and meaningful results. The Titanic Ship Sunk dataset reveals
+missing information across various fields. Specifically, records lack
+gender details for certain passengers, instances exist where fare
+payments are not recorded, cabin numbers are missing for some
+individuals, and information about the port of embarkation is absent for
+others. Lifeboat assignment details, identification numbers for
+recovered bodies, and home or destination information are not provided
+for specific cases. Addressing these gaps in data is imperative during
+analysis, and researchers are advised to employ suitable methods like
+imputation or exclusion based on research goals and the nature of the
+missing information. It is crucial to thoroughly assess the impact of
+missing data on results and draw conclusions accordingly for a
+comprehensive and accurate interpretation of the dataset.
 
--   Class distribution: 200 in Class 1, 119 in Class 2, 181 in Class 3.
+**Survival Statistics:**
 
--   Missing data: Gender, fare, cabin, embarkation port, lifeboat, body
-    ID, destination.
+As per the information provided in the dataset, Out of the total
+passengers, 809 did not survive, while 465 individuals survived
 
-## **Fields in Titantic Data Set**
+**Data Distribution:** The data has been distributed as per the class,
+below is the information on how the data has been distributed between
+the people.
 
-Name: The name of the passenger. Sex: Gender of the passenger.\
-Age: Age of the passenger.\
-Sibsp: Number of siblings or spouses aboard.\
-Parch: Number of parents or children aboard.\
-Ticket: Ticket number. Fare: Fare paid for the ticket.\
-Cabin: Cabin number.\
-Embarked: Port of embarkation.\
-Boat: Lifeboat assignment.\
-Body: Identification number of the recovered body.\
-Home.Dest: Home or destination of the passenger.\
+Class 1: 200 people
 
-## Percentage of Missing data
+Class 2: 119 people
 
-Function used: vis_mis
+Class 3: 181 people
 
-![](Percent%20graph.png)
+Total: 1309 people
 
-## Missing Element in Each Column
+Out of which the number of people that have not survived is 809 people
+and the number of people survived is 465 people.
 
-![](Missing%20Element%20Graph.png)
+**Fields in the Dataset:**
 
-## Pattern of Missing Data
+|                                                                                      |
+|:------------------------------------------------------------------------------------:|
+|                           Name: The name of the passenger.                           |
+|                            Sex: Gender of the passenger.                             |
+|                              Age: Age of the passenger.                              |
+|                     Sibsp: Number of siblings or spouses aboard.                     |
+|                     Parch: Number of parents or children aboard.                     |
+|                                Ticket: Ticket number.                                |
+|                           Fare: Fare paid for the ticket.                            |
+|                                 Cabin: Cabin number.                                 |
+|                            Embarked: Port of embarkation.                            |
+|                              Boat: Lifeboat assignment.                              |
+|                  Body: Identification number of the recovered body.                  |
+|                   Home.Dest: Home or destination of the passenger.                   |
+|   Missing Information: Certain fields in the dataset contain missing information:    |
+|            Sex: Missing information about the gender of some passengers.             |
+|          Fare: Missing information about the fare paid by some passengers.           |
+|                  Cabin: Missing cabin numbers for some passengers.                   |
+|   Embarked: Missing information about the port of embarkation for some passengers.   |
+|        Boat: Lifeboat assignment information is missing for some passengers.         |
+|  Body: Identification numbers of recovered bodies are missing for some passengers.   |
+| Home.Dest: Information about the home or destination is missing for some passengers. |
 
--   Significant missing data in body (91%), cabin (77%), and boat (63%)
-    variables.
+**Missing Variables Plot:s**
 
--   Body variable contains the highest missing percentage, followed by
-    cabin and boat.
+This script displays which variables have contain the most missing
+variables in the titantic data via gg_miss_var function
 
--   Variable types and influencing factors crucial for effective
-    imputation methods.
+```{r, warning=FALSE, echo=T, message=FALSE}
 
-## **Mean/Median Imputation**
+# Install and load necessary packages
+#install.packages("tidyverse")
+#library(tidyverse)
+#install.packages("readxl")
+library(readxl)
+your_data <- read_excel("Titanic_dataset.xlsx")
+
+install.packages("naniar",repos = "http://cran.us.r-project.org")
+library("naniar")
+library(ggplot2)
+
+gg_miss_var(your_data) + labs(y = "Number of Missing Values")
+```
+
+This script is done via vis_mis function to display the percentage of
+missing data regarding the variables.
+
+```{r}
+vis_miss(your_data)
+
+```
+
+The code creates a plot that displays if there is a missing element in
+the dataset's columns. Grey indicating that there is a missing element.
+
+```{r}
+gg_miss_which(your_data)
+```
+
+#### Pattern of Missing Data
+
+Upon viewing the visualizations of the missing data distribution for the
+titanic data set. One can see certain fields contain the most missing
+values. These fields such as body, cabin, boat, age and home.dest. The
+missing variables percentage plot displays these percentages for the
+certain variables. One can also observe from the titatanic data set
+plots that overall 79% of the data is present and 21% is missing.
+Specifically, the body variable contains data which 91% is missing,
+followed by cabin 77% and boat 63%. One could consider that the
+variables such as body may be influenced by another factor when
+hypothesizing what kind of missing data type each of these fields belong
+to and what imputation methods one could apply.
+
+**1. Mean/Median Imputation**
 
 The code involves installing and loading the "tidyverse" package, which
 provides a variety of tools for data science jobs, as well as loading
-the "readxl" package for handling Excel files.The code indicates that
-1014 m and 263 are missing values in "age"
+the "readxl" package for handling Excel files.
 
-## 
+```{r, warning=FALSE, echo=T, message=FALSE}
 
-`{r} # Print the counts of missing values cat("Missing values in 'age':", missing_age, "\n") #Missing values in 'age': 263}`
+# Install and load necessary packages
+#install.packages("tidyverse")
+#library(tidyverse)
+#install.packages("readxl")
+library(readxl)
+```
+
+The code computes missing values for particular variables, specifies
+columns for imputation, reads the Titanic dataset, and produces counts.
+At present, the 'age' column missing 263 values.
+
+```{r, warning=FALSE, echo=TRUE}
+
+your_data <- read_excel("Titanic_dataset.xlsx")
+#head(your_data)
+
+# Define the columns for which you want to perform imputation
+columns_to_impute <- c("pclass", "survived", "age", "sibsp", "parch", "fare")
+
+missing_age <- sum(is.na(your_data$age))
+missing_cabin <- sum(is.na(your_data$cabin))
+missing_boat <- sum(is.na(your_data$boat))
+missing_body <- sum(is.na(your_data$body))
+missing_home_dest <- sum(is.na(your_data$home.dest))
+```
+
+The code indicates that 1014 m and 263 are missing values in "age"
+
+```{r}
+# Print the counts of missing values
+cat("Missing values in 'age':", missing_age, "\n")
+#Missing values in 'age': 263
+```
 
 The code shows that there are 823 missing values in the "boat" and 1014
 missing values in the "cabin."
 
-`{r} cat("Missing values in 'cabin':", missing_cabin, "\n") #Missing values in 'cabin': 1014}`
+```{r}
+cat("Missing values in 'cabin':", missing_cabin, "\n")
+#Missing values in 'cabin': 1014 
+```
 
 The code shows 1188 missing values in the "body" and 823 missing values
 in the "boat."
 
-`{r} cat("Missing values in 'body':", missing_body, "\n") #Missing values in 'body': 1188}`
+```{r}
+cat("Missing values in 'body':", missing_body, "\n")
+#Missing values in 'body': 1188 
+```
 
-`{r} cat("Missing values in 'boat':", missing_boat, "\n") #Missing values in 'boat': 823}`
+```{r}
+cat("Missing values in 'boat':", missing_boat, "\n")
+#Missing values in 'boat': 823 
+```
 
 The code shows 564 missing values in the "home.dest"
 
-`{r} cat("Missing values in 'home.dest':", missing_home_dest, "\n") #Missing values in 'home.dest': 564}`
+```{r}
+cat("Missing values in 'home.dest':", missing_home_dest, "\n")
+#Missing values in 'home.dest': 564  
+```
 
-## **Multiple Imputation**
+2.  **Multiple Imputation**
 
-Using the below code: - Import dataset, Select columns for imputation,
-Use Predictive mean matching for multiple imputation and save imputed
-data.
+The Titanic dataset is imported into the R, which then chooses which
+columns to imputation. Multiple imputation is then carried out using
+predictive mean matching, and the results are saved as imputed data.
 
-Use random forest and logistic regression techniques to show summary
+```{r, warning=FALSE, echo=TRUE}
+# Install and load necessary packages
+# install.packages("mice")
+# install.packages("openxlsx")
+library(mice)
+library(openxlsx)
+
+# Load the Titanic dataset
+your_data <- read_excel("Titanic_dataset.xlsx")
+
+# Define the columns for which you want to perform imputation
+columns_to_impute <- c("pclass", "survived", "age", "sibsp", "parch", "fare")
+
+# Create a copy of the original data to preserve the original dataset
+imputation_data <- your_data
+
+# Set the seed for reproducibility
+set.seed(123)
+
+# Perform multiple imputation
+imputed_data <- mice(imputation_data[, columns_to_impute], m = 5, method = 'pmm')
+
+```
+
+After completing the imputation using random forest and logistic
+regression techniques, the code saves the dataset and shows summary
 statistics for the imputed data.
 
-**K-Nearest Neighbors (KNN) Imputation**
+```{r}
+# Other imputation methods: 'logreg' for logistic regression, 'rf' for random forest
 
-Functions used:- aggr Package used:- VIM
+# Complete the imputation process
+completed_data <- complete(imputed_data)
 
-Above functions and packages used to display missing data pattern after
-loading.
+# Save the imputed dataset using openxlsx
+write.xlsx(completed_data, "Imputed_Titanic_dataset_MultipleImputation.xlsx")
 
-White indicates missing.
+# Display summary statistics of the imputed dataset
+summary(completed_data)
+```
 
-## **Most Frequent Value Imputation**
+3.  **K-Nearest Neighbors (KNN) Imputation**
 
-\- Defines columns that have missing data
+The code uses the aggr function from the VIM package to display the
+missing data pattern after loading the necessary packages and importing
+the Titanic dataset. White indicates missing.
 
-\- Imputation is performed using the column with the highest frequency
-value.
+```{r}
+# Install and load necessary packages
+# install.packages("readxl")
+#install.packages("VIM")
+library(readxl)
+library(VIM)
 
-\- After imputation, it shows the total number of missing values for
-every column.
+# Load the Titanic dataset
+your_data <- read_excel("Titanic_dataset.xlsx")
 
-## Data Visualization
+# Display missing data pattern
+aggr(your_data, col = c("blue", "white"), numbers = TRUE, sortVars = TRUE, labels = names(your_data), cex.axis = 0.5, gap = 3, ylab = c("Histogram of missing data", "Pattern"))
 
-#### **Scatterplot Matrix:**
+```
 
--   Packages installed: GGally
+4.  **Most Frequent Value Imputation**
 
--   Functions used: ggpairs
+The code imports the Titanic dataset, loads the required packages,
+defines columns that have missing data, and then imputation is performed
+using the column with the highest frequency value. After imputation, it
+shows the total number of missing values for every column.
 
--   It chooses numerical variables and construct a scatter plot matrix
-    for analysis.
+```{r}
+# Load necessary packages
+# install.packages("readxl")
+# install.packages("Hmisc")
+library(readxl)
+library(Hmisc)
 
-## 
+# Load the Titanic dataset
+your_data <- read_excel("Titanic_dataset.xlsx")
 
-![](Scatterplot%20Matrix.png)
+# Define the columns with missing data
+columns_with_missing <- c("Sex", "Fare", "Cabin", "Embarked", "Boat", "Body", "Home.Dest")
 
-## **Multiple Correspondence Analysis (MCA) Plot:**
+# Perform imputation with the most frequent value for each column
+imputed_data <- your_data
+for (col in columns_with_missing) {
+  # Check if the column has missing values
+  if (anyNA(imputed_data[[col]])) {
+    # Impute missing values with the most frequent value
+    imputed_data[[col]] <- impute(imputed_data[[col]], fun=function(x) { 
+      tab <- table(x)
+      levels <- names(tab)[tab == max(tab)]
+      x[is.na(x)] <- levels[1]
+      x
+    })
+  }
+}
 
-These are the results of Multiple Correspondence Analysis (MCA) on the
-Titanic dataset using the FactoMineR package.
+# Display the count of missing values for each column after imputation
+missing_counts <- colSums(is.na(imputed_data))
+print("Missing values for each column after imputation:")
+"Missing values for each column after imputation:"
+```
 
-## 
+Prints count of missing values for each column.
 
-![](MCA%20Factor%20Map.png){width="320"}
+```{r}
+print(missing_counts)
+ 
+```
 
-## **Violin Plots Before and After Imputation:**
+### Data Visualization
+
+**Scatterplot Matrix:**
+
+Installing and loading the GGally package, choosing numerical variables,
+and utilizing the ggpairs function to construct a scatterplot matrix for
+analysis are all done by the code.
+
+```{r}
+# Install and load GGally package
+#install.packages("GGally")
+library(GGally)
+
+# Select numeric variables
+numeric_variables <- c("age", "fare", "sibsp", "parch")
+
+# Create scatterplot matrix
+ggpairs(your_data[, numeric_variables])
+ 
+```
+
+**Multiple Correspondence Analysis (MCA) Plot:**
+
+The code in this article demonstrates the results of Multiple
+Correspondence Analysis (MCA) on the Titanic dataset using the
+FactoMineR package.
+
+```{r}
+# Install FactoMineR package
+#install.packages("FactoMineR")
+
+# Load FactoMineR package
+library(FactoMineR)
+
+
+# Perform MCA
+mca_result <- MCA(your_data, graph = FALSE)
+
+# Plot MCA
+plot.MCA(mca_result)
+ 
+```
+
+**Density Plots Before and After Imputation:**
+
+The script uses the end extend package to plot the dendrogram based on
+missingness in the Titanic dataset. The code creates columns for
+imputation, import the Titanic dataset, loads the mice package, and then
+uses mice to do an imputation for a subset of the defined columns. After
+that, the imputation procedure is finished, and the imputed data is
+summarized.
+
+```{r}
+# Install and load necessary packages
+#install.packages("mice")
+library(mice)
+
+# Load the Titanic dataset
+your_data <- read_excel("Titanic_dataset.xlsx")
+
+# Define the columns for imputation
+columns_to_impute <- c("age", "fare", "sibsp", "parch")
+
+# Perform imputation
+imputed_data <- complete(mice(your_data[, columns_to_impute], m = 1))
+ 
+```
+
+Two plots are laid out in the draft. It displays the distribution both
+before and after imputation by first creating a density plot for the
+'age' variable from the original dataset and then another density plot
+for the 'age' variable from the imputed dataset.
+
+```{r}
+# Create density plot before imputation
+par(mfrow = c(1, 2))
+plot(density(your_data$age, na.rm = TRUE), main = "Before Imputation", ylab = "Density", xlab = "Age")
+
+# Create density plot after imputation
+plot(density(imputed_data$age), main = "After Imputation", ylab = "Density", xlab = "Age")
+ 
+```
+
+**Heatmap of Correlation Matrix:**
+
+For numerical variables, the script computes correlation matrices both
+before and after imputation and then generates heatmaps to show
+correlations. Correlations before imputation are shown in the "Before
+Imputation" heatmap. After imputation, the script creates a heatmap that
+shows correlations and the relationship between the variables.
+
+```{r}
+# Compute correlation matrix before and after imputation
+cor_before <- cor(your_data[, numeric_variables], use = "pairwise.complete.obs")
+cor_after <- cor(completed_data[, numeric_variables], use = "pairwise.complete.obs")
+
+# Create heatmaps
+par(mfrow = c(1, 2))
+heatmap(cor_before, main = "Before Imputation", xlab = "Variables", ylab = "Variables", col = heat.colors(10))
+
+
+heatmap(cor_after, main = "After Imputation", xlab = "Variables", ylab = "Variables", col = heat.colors(10))
+ 
+```
+
+**Violin Plots Before and After Imputation:**
 
 This code depicts entire distribution of numeric data between titanic
 variables.
 
-![](Violin%20Plot.png){width="606"}
+```{r}
+library(ggplot2)
+ggplot() +
+  geom_violin(data = your_data, aes(x = "", y = age), fill = "yellow") +
+  geom_violin(data = completed_data, aes(x = "", y = age), fill = "purple") +
+  labs(title = "Violin Plots Before and After Imputation", x = "", y = "Age") +
+  theme_minimal()
+```
 
-## Conclusion
+### Conclusion
 
--   R-scripts explore diverse imputation techniques like KNN, Most
-    Frequent Value, and Multiple Imputation for Titanic dataset.
+The purpose of addressing missing data and performing analysis on the
+Titanic dataset, the supplied R scripts give a thorough method. They
+include imputation techniques like KNN, Most Frequent Value, and
+Multiple Imputation. They also display patterns in missing data, values
+that have been imputed, and variations in the distribution of data both
+before and after imputation. Data structure and relationships can be
+understood through exploratory approaches like correlation analysis and
+multiple correspondence analysis (MCA). Together, these analyses improve
+data quality, simplify data pre-processing, and allow for
+better-informed decision-making in later modeling and analysis
+activities.
 
--   Analysis includes detecting missing data patterns, imputed values,
-    and pre-imputation data distribution variations.
-
--   Techniques include mean/median, KNN, multiple imputation, and random
-    forest.
-
--   Emphasizes sensitivity analysis and validation for reliable
-    imputation results.
-
-## Conclusion
-
--   R-Language proves effective and user-friendly in facilitating robust
-    statistical analyses, positioning researchers at the forefront of
-    advancements.
-
--   Provides researchers with practical skills for missing data handling
-    and highlights emerging trends in the field.
+In conclusion, the project on missing data and imputation using
+R-Language has provided a thorough exploration of diverse techniques for
+handling missing values. By delving into methods such as mean/median
+imputation, multiple imputation, k-nearest neighbors, and random forest,
+we have gained a nuanced understanding of their applications and
+limitations. The practical implementation in R demonstrated the
+accessibility of these methods, showcasing the importance of selecting
+an approach aligned with data characteristics. Emphasizing best
+practices, such as sensitivity analysis and validation, ensures the
+reliability of imputation results. This project not only equips
+researchers with practical skills for addressing missing data but also
+highlights the dynamic landscape of emerging trends, positioning them at
+the forefront of advancements in the field. Overall, the use of
+R-Language for missing data imputation underscores its effectiveness and
+user-friendly nature in facilitating robust statistical analyses
+[@akmam2019multiple].
